@@ -1,0 +1,40 @@
+<script >
+		$(function() {
+			$('#global').bind("keyup click", function() {
+				hideShow();
+			});
+			hideShow();
+		});
+
+		function hideShow() {
+			if ($('#texto').is(':checked')) {
+				$('#inv').show();
+			} else {
+				$('#inv').hide();
+			}
+			if ($('#pagina').is(':checked')) {
+				$('#inv2').show();
+			} else {
+				$('#inv2').hide();
+			}
+	</script>
+
+	<div class="form-group row" id="global">
+  <label for="title-type" class="col-sm-2 col-form-label">Tipo Título:</label>
+  <div class="col-sm-2">
+    <input name="title-type" type="radio" value="text" id="texto"> Texto
+  </div>
+  <div class="col-sm-2">
+    <input name="title-type" type="radio" value="page" id="pagina"> Página
+  </div>
+</div>
+<div style="diplay: none;" id="inv">
+  Coisas escondidas
+</div>
+<div style="diplay: none;" id="inv2">
+  Outras Cenas escondidas
+</div>
+
+
+Negocio da data e hora juntas :)
+{{ value|date:"D d M Y" }} {{ value|time:"H:i" }}

@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load meus_filtros %}
+{% block titulo %}
+	{{ titulo }}
+{% endblock titulo %}
+{% block nome_pagina %}
+	{{ titulo }} Reunião
+{% endblock nome_pagina %}
+
+{% block conteudo %}
+
+	<h2>
+	Solicitar Uma Nova Reunião
+	</h2>
+	<form  method="post">
+		{% csrf_token %}
+
+	<div class="form-goup">
+			{{ form_reuniao.tipo_reuniao.erros }}
+			<label>Tipo</label>
+
+			{{ form_reuniao.tipo_reuniao|addclass:'form-control'}}
+
+		</div>
+		<div class="form-goup">
+		 <a class="navbar-brand" href="{% url 'agendar_tipo' %}">Novo Tipo</a>
+		</div>
+
+<div class="form-goup form-inline">
+			{{ form_data.dia.erros }}
+			<dl>Data
+				<dt>{{ form_data.dia|addclass:'form-control'}} </dt></dl>
+			</div>
+
+			<div class="form-inline">
+				<div class="form-goup">
+
+					{{ form_data.inicio.erros }}
+					<label>Inicio</label>
+					{{ form_data.inicio|addclass:'form-control  mb-2 mr-sm-2'}}
+				</div>
+
+				<div class="form-goup">
+
+					{{form_data.fim.erros }}
+					<label>Fim</label>
+					{{ form_data.fim|addclass:'form-control  mb-2 mr-sm-2'}}
+				</div>
+			</div>
+
+			<div class="form-goup">
+				{{ form_reuniao.pauta.erros }}
+				<label>Pauta</label>
+				{{ form_reuniao.pauta|addclass:'form-control'}}
+			</div>
+			
+			<div class="form-goup">
+				{{ form_reuniao.local.erros }}
+				<label>Local</label>
+				{{ form_reuniao.local|addclass:'form-control' }}
+			</div>
+
+			<div class="form-goup">
+				{{ form_reuniao.semestre.erros }}
+				<label>Semestre</label>
+				{{ form_reuniao.semestre|addclass:'form-control' }}
+			</div>
+			<br>
+			<div class="form-goup">
+				<input type="submit" class="btn btn-sm btn-info" value="Salvar">
+			</div>
+
+
+
+
+
+	</form>
+
+		{% endblock conteudo %}

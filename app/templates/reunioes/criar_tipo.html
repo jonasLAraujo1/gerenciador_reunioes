@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load meus_filtros %}
+{% block titulo %}
+	{{ titulo }}
+{% endblock titulo %}
+{% block nome_pagina %}
+	{{ titulo }}
+{% endblock nome_pagina %}
+
+{% block conteudo %}
+<script type="text/javascript">
+
+$(document).ready(function() {
+    $('#cad_tipo').modal('show');
+})
+</script>
+
+
+<div class="modal fade" id="cad_tipo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-center">Insira um novo tipo de reunião, meu rei</h4>
+                <a href="{% url 'agendar_reuniao'%}"><button type="button" class="close"aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button></a>
+            </div>
+            <div class="modal-body">
+                <dl class="dl-horizontal">
+                    <form class="form-horizontal" method="POST">
+                    {% csrf_token %}
+                    {{ form_tipo.titulo.erros }}
+                    <dt>Tipo da Reunião</dt>
+                    {{ form_tipo.titulo|addclass:'form-control'}}
+                    <dt>Cor</dt>
+                    {{ form_tipo.cor.erros }}
+                    <dt>{{form_tipo.cor|addclass:'form-control'}}</dt>
+                </dl>
+            </div>
+            <div class="modal-content">
+                <div class="modal-body">
+                    <nav class="navbar navbar-light bg-light">
+
+                            <button class="btn btn-outline-success " type="submit">Confimar</button>
+                        </form>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    {% endblock conteudo %}

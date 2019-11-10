@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    {%load static %}
+    <head>
+        <meta charset="UTF-8">
+        <title>
+        {% block titulo %}
+        {% endblock titulo %}
+        </title>
+        
+        <link rel="stylesheet" href="{% static 'app/css/bootstrap.css'%}" />
+        <script src="{% static 'app/js/jquery.min.js'%}"></script>
+        <script src="{% static 'app/js/bootstrap.min.js'%}"></script>
+        {% block extras %}
+        {% endblock extras %}
+    </head>
+    <body>      
+        <header class="navbar navbar-dark flex-column flex-md-row " style='background-color: #28a745'>
+            <div class="navbar" >
+                <ul class="nav nav-pills nav-justified">
+                    <li class="nav-item">
+                        <a class="navbar-brand" href="{% url 'calendario' %}"><button class='btn btn-light btn-lg btn-outline' type='button' >Inicio</button>
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="navbar-brand" href="{% url 'agendar_reuniao'%}"> <button class='btn btn-light btn-lg btn-outline' type='button' >Agendar Reunião</button> </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="navbar" >
+                <ul class="nav nav-pills justify-content-center">
+                    <li class="nav-item">
+                        
+                        <div class='card-header 'style='border-radius: 7%;'>
+                            <h2>
+                            {% block nome_pagina %}
+                            {% endblock nome_pagina %}
+                            </h2>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="navbar" >
+                <ul class="nav nav-pills nav-justified">
+                    <li class="nav-item">
+                        <a class="navbar-brand" href="./formularios/listaNotificacoes.php"><img src="{% static 'app/img/bell.svg'%}"  style="float:left;">
+                            <span class="badge badge-sm badge-danger" style="margin: 0px -3px;">
+                                {% block notificacao %}
+                                {% endblock notificacao %}
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="navbar-brand" href="./formularios/encerrar.php"><img src="{% static 'app/img/arrow-out-circle.svg'%}" ></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="navbar" >
+                <ul class="nav nav-pills justify-content-end">
+                    <li class="nav-item">
+                        <form class="form-inline">
+                            <input class='form-control  my-2 my-lg-0' type="search" placeholder='id range' name='busca' required name=busca >
+                            <button class=' btn btn-inline-primary my-2 my-sm-0' type='submit'>Buscar</button>
+                            
+                        </form>
+                    </li>
+                </ul>
+            </div>
+            
+        </div>
+    </header>
+    <div class="container-fluid" style="background-color: #81C784">
+        
+        <div class="container"  style="background-color: #fff">  
+            {% block conteudo %}
+            {% endblock conteudo %}
+        </div>
+        
+    </div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load meus_filtros %}
+{% block titulo %}
+	Cadastrar Usuario
+{% endblock titulo %}
+{% block nome_pagina %}
+	Cadastrar Usuario
+{% endblock nome_pagina %}
+{% block conteudo %}
+	
+	<h2>
+	Cadastre-se
+	</h2>
+	<form  method="post">
+		{% csrf_token %}
+		<div class="form-goup">
+			{{ form_usuario.username.erros }}
+			<label>Nome </label>
+			{{ form_usuario.username}}
+		</div>
+		<div class="form-goup">
+			{{ form_usuario.password1.erros }}
+			<label>Senha </label>
+			{{ form_usuario.password1}}
+		</div>
+		<div class="form-goup">
+			{{ form_usuario.password2.erros }}
+			<label>Confirmação de senha </label>
+			{{ form_usuario.password2}}
+		</div>
+		
+		<div class="form-goup">
+			{{ form_usuario.email.erros }}
+			<label>Email </label>
+			{{ form_usuario.email}}
+		</div>
+				<div class="form-goup">
+			{{ form_usuario.registro.erros }}
+			<label>Registro</label>
+			{{ form_usuario.registro}}
+		</div>
+		
+		<br>
+		<div class="form-goup">
+			<input type="submit" class="btn btn-sm btn-info" value="Salvar">
+		</div>
+		
+	{% endblock conteudo %}
