@@ -10,7 +10,7 @@
 {% block conteudo %}
 
 	<h2>
-	Solicitar Uma Nova Reunião
+	 Reunião
 	</h2>
 	<form  method="post">
 		{% csrf_token %}
@@ -21,9 +21,6 @@
 
 			{{ form_reuniao.tipo_reuniao|addclass:'form-control'}}
 
-		</div>
-		<div class="form-goup">
-		 <a class="navbar-brand" href="{% url 'agendar_tipo' %}">Novo Tipo</a>
 		</div>
 
 <div class="form-goup form-inline">
@@ -37,14 +34,14 @@
 
 					{{ form_data.inicio.erros }}
 					<label>Inicio</label>
-					{{ form_data.inicio|addclass:'form-control  mb-2 mr-sm-2'}}
+					{{ form_data.inicio|addclass:'form-control'}}
 				</div>
 
 				<div class="form-goup">
 
 					{{form_data.fim.erros }}
 					<label>Fim</label>
-					{{ form_data.fim|addclass:'form-control  mb-2 mr-sm-2'}}
+					{{ form_data.fim|addclass:'form-control'}}
 				</div>
 			</div>
 
@@ -64,6 +61,11 @@
 				{{ form_reuniao.semestre.erros }}
 				<label>Semestre</label>
 				{{ form_reuniao.semestre|addclass:'form-control' }}
+			</div>
+        <div class="form-goup">
+				{{ form_reuniao.deliberacoes.erros }}
+				<label>Deliberações</label>
+				{{ form_reuniao.deliberacoes|addclass:'form-control'}}
 			</div>
 		<div class="form-goup">
 				{{ form_reuniao.observacoes.erros }}

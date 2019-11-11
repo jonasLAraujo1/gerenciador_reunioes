@@ -52,7 +52,6 @@ class Reuniao(models.Model):
     # participantes = models.MultiploChoice(null=False, blank=False)
     observacoes = models.TextField(null=True, blank=True)
     deliberacoes = models.TextField(null=True, blank=True)
-    status = models.CharField(
-        max_length=1, choices=STATUS_CHOICES, default="1", null=False, blank=False)
+    status = models.CharField(max_length=1, choices=STATUS_CHOICES, default="1", null=False, blank=False)
     def __str__(self):
         self.tipo_reuniao.titulo

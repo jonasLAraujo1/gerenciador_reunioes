@@ -36,7 +36,7 @@
 		return false;
 		},
 		events: [
-		 {% for i in reunioes %} { title: "{{ i.title}}", start: '{{ i.start}}', end: '{{ i.end }}', }, {% endfor %}
+		 {% for i in reunioes %} { id: "{{ i.id}}", title: "{{ i.title}}", start: '{{ i.start}}', end: '{{ i.end }}',info: '{{ i.status}}',color: '{{ i.color }}', }, {% endfor %}
 
 
 		]
@@ -76,29 +76,42 @@
 				<div class="modal-content">
 					<div class="modal-body">
 						<nav class="navbar navbar-light bg-light" >
-							<form class="form-horizontal" method="POST" action="./formularios/FormularioConfirmar.php">
+							<form class="form-horizontal" method="POST" action="{%url 'acao_marcar' %}">
+								{% csrf_token %}
 								<input type="hidden" class="form-control" name="id" id="id">
-								<button  class="btn btn-outline-success " type="submit">Confimar</button>
+
+								<button  class="btn btn-outline-success " type="submit">Confirmar</button>
 							</form>
-							<form class="form-horizontal" method="POST" action="./formularios/FormularioAlterar.php">
+							<form class="form-horizontal" method="POST" action="{%url 'acao_marcar' %}">
+								{% csrf_token %}
 								<input type="hidden" class="form-control" name="id" id="id">
+
 								<button  class="btn btn-outline-success " type="submit">Alterar</button>
 							</form>
-							
-							<form class="form-horizontal" method="POST" action="./formularios/FormularioConsolidar.php">
+							<form class="form-horizontal" method="POST" action="{%url 'acao_marcar' %}">
+								{% csrf_token %}
 								<input type="hidden" class="form-control" name="id" id="id">
+
 								<button  class="btn btn-outline-success " type="submit">Consolidar</button>
 							</form>
-							<form class="form-horizontal" method="POST" action="./formularios/cancelar.php">
+							<form class="form-horizontal" method="POST" action="{%url 'acao_marcar' %}">
+								{% csrf_token %}
 								<input type="hidden" class="form-control" name="id" id="id">
-								<button  class="btn btn-outline-success "  type="submit">Cancelar</button>
+
+								<button  class="btn btn-outline-success " type="submit">Cancelar</button>
 							</form>
+
+
+
 						</nav>
 						<nav class="navbar navbar-light bg-light" >
 							<form class="form-horizontal" method="POST"  action="./ata/gerar_ata.php"> <!-- target=_BLANK -->
 							<input type="hidden" class="form-control" name="id" id="id">
 							<button  class="btn  btn-outline-success" type="submit">Gerar ATA</button>
 						</form>
+
+
+
 					</nav>
 				</div>
 			</div>
