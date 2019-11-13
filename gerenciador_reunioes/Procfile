@@ -1,0 +1,1 @@
+web: gunicorn gerenciador_reunioes.wsg
