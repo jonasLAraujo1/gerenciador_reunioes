@@ -36,11 +36,11 @@ class FormData(forms.ModelForm):
         }
         fields = ['dia', 'inicio', 'fim']
 
-class FormProfile(forms.ModelForm):
-    class Meta:
-        model = Profile
-        fields = '__all__'
-
+# class FormProfile(forms.ModelForm):
+#     class Meta:
+#         model = Profile
+#         fields = '__all__'
+#
 
 class FormReuniao(forms.ModelForm):
     class Meta:

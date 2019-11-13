@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load meus_filtros %}
+{% block titulo %}
+	{{ titulo }}
+{% endblock titulo %}
+{% block nome_pagina %}
+	{{ titulo }}
+{% endblock nome_pagina %}
+
+{% block conteudo %}
+<script type="text/javascript">
+
+$(document).ready(function() {
+    $('#cad_tipo').modal('show');
+})
+</script>
+
+
+<div class="modal fade" id="cad_tipo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title text-center">Tem certeza que quer Excluir a reunião, meu rei</h4>
+                <a href="{% url 'calendario'%}"><button type="button" class="close"aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button></a>
+            </div>
+            <div class="modal-body">
+                <dl class="dl-horizontal">
+                    <dt>Tipo da Reunião: {{ reuniao_bd.tipo_reuniao.titulo}}</dt>
+
+                    <dt>Data: {{reuniao_bd.data_reuniao.dia|date:"d/m/Y" }}</dt>
+                    <dt>Pauta: {{reuniao_bd.pauta }}</dt>
+                </dl>
+            </div>
+            <div class="modal-content">
+                <div class="modal-body">
+                    <nav class="navbar navbar-light bg-light">
+                         <form method="post">
+                             {%csrf_token%}
+                            <button class="btn btn-outline-danger " type="submit">Excluir</button>
+                        </form>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    {% endblock conteudo %}

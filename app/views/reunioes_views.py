@@ -1,13 +1,14 @@
-
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 from django.views.defaults import bad_request
 
-from ..entidades import reunioes
+from ..entidades import reunioes, alertas
 from ..forms import *
-from ..services import reuniao_service,data_services
+from ..services import reuniao_service, data_services, alerta_services
 
 
+@login_required()
 def agendar_reuniao(request):
     titulo = "Agendar"
     notificacao = 0
@@ -34,6 +35,11 @@ def agendar_reuniao(request):
                                                 semestre=semestre, observacoes=observacoes, deliberacoes=deliberacoes,
                                                 status=status)
                 reuniao_service.agendar_reuniao(nova_reuniao)
+                observacoes = "Uma nova Reunião com a Pauta: " + str(pauta) + \
+                              " Foi Agendada Para o Dia: " + str(dia) + " com  previsão de Inicioa as " + str(inicio)
+                alerta_novo = alertas.Alerta(titulo="Reunião Agendada", observacoes=observacoes, status="1")
+                alerta_services.criar_alerta(alerta_novo)
+
                 return redirect('calendario')
     else:
         form_reuniao = FormAgendaReuniao()
@@ -44,38 +50,40 @@ def agendar_reuniao(request):
                    "form_data": form_data})
 
 
-def marcar_reuniao(request,id):
-        reuniao_bd = reuniao_service.retornar_reuniao_id(id)
-        data_bd = data_services.retornar_data_id(id)
+@login_required()
+def marcar_reuniao(request, id):
+    reuniao_bd = reuniao_service.retornar_reuniao_id(id)
+    data_bd = data_services.retornar_data_id(id)
 
-        form_reuniao = FormReuniao(request.POST or None, instance=reuniao_bd)
-        form_data = FormData(request.POST or None, instance=data_bd)
-        titulo = "Marcar"
-        notificacao = 0
-        if form_data.is_valid():
-            dia = form_data.cleaned_data["dia"]
-            inicio = form_data.cleaned_data["inicio"]
-            fim = form_data.cleaned_data["fim"]
-            nova_data = reunioes.Data(dia=dia, inicio=inicio, fim=fim)
-            if form_reuniao.is_valid():
-                tipo = form_reuniao.cleaned_data["tipo_reuniao"]
-                pauta = form_reuniao.cleaned_data["pauta"]
-                local = form_reuniao.cleaned_data["local"]
-                semestre = form_reuniao.cleaned_data["semestre"]
-                deliberacoes = form_reuniao.cleaned_data["deliberacoes"]
-                observacoes = form_reuniao.cleaned_data["observacoes"]
-                status = "2"
-                data_services.alterar_data(data_bd,nova_data)
-                nova_reuniao = reunioes.Reuniao(tipo_reuniao=tipo, data=data_bd, pauta=pauta, local=local,
-                                                 semestre=semestre, observacoes=observacoes, deliberacoes=deliberacoes,
-                                                 status=status)
-                reuniao_service.alterar_reuniao(reuniao_bd,nova_reuniao)
-                return redirect('calendario')
-        return render(request, 'reunioes/form_reuniao.html',
-                      {"titulo": titulo, "notificacao": notificacao, "form_reuniao": form_reuniao,
-                       "form_data": form_data})
+    form_reuniao = FormReuniao(request.POST or None, instance=reuniao_bd)
+    form_data = FormData(request.POST or None, instance=data_bd)
+    titulo = "Marcar"
+    notificacao = 0
+    if form_data.is_valid():
+        dia = form_data.cleaned_data["dia"]
+        inicio = form_data.cleaned_data["inicio"]
+        fim = form_data.cleaned_data["fim"]
+        nova_data = reunioes.Data(dia=dia, inicio=inicio, fim=fim)
+        if form_reuniao.is_valid():
+            tipo = form_reuniao.cleaned_data["tipo_reuniao"]
+            pauta = form_reuniao.cleaned_data["pauta"]
+            local = form_reuniao.cleaned_data["local"]
+            semestre = form_reuniao.cleaned_data["semestre"]
+            deliberacoes = form_reuniao.cleaned_data["deliberacoes"]
+            observacoes = form_reuniao.cleaned_data["observacoes"]
+            status = "2"
+            data_services.alterar_data(data_bd, nova_data)
+            nova_reuniao = reunioes.Reuniao(tipo_reuniao=tipo, data=data_bd, pauta=pauta, local=local,
+                                            semestre=semestre, observacoes=observacoes, deliberacoes=deliberacoes,
+                                            status=status)
+            reuniao_service.alterar_reuniao(reuniao_bd, nova_reuniao)
+            return redirect('calendario')
+    return render(request, 'reunioes/form_reuniao.html',
+                  {"titulo": titulo, "notificacao": notificacao, "form_reuniao": form_reuniao,
+                   "form_data": form_data})
 
 
+@login_required()
 def consolidar_reuniao(request, id):
     reuniao_bd = reuniao_service.retornar_reuniao_id(id)
     data_bd = data_services.retornar_data_id(id)
@@ -108,6 +116,7 @@ def consolidar_reuniao(request, id):
                    "form_data": form_data})
 
 
+@login_required()
 def agendar_tipo(request):
     titulo = "Novo Tipo"
     notificacao = 0
@@ -125,34 +134,12 @@ def agendar_tipo(request):
                   {"titulo": titulo, "notificacao": notificacao, "form_tipo": form_tipo})
 
 
+@login_required()
 def calendario(request):
     notificacao = ""
     reunioes = reuniao_service.retornar_tudo()
-    #print(reunioes)
+    # print(reunioes)
     return render(request, 'reunioes/main.html', {"reunioes": reunioes, "notificacao": notificacao})
-
-
-def cancelar_reuniao(request,id):
-    form_reuniao = FormAgendaReuniao()
-    return render(request, 'reunioes/form_pre_reuniao.html')
-
-
-def consolidar_reuniao(request):
-    form_reuniao = FormAgendaReuniao()
-    return render(request, 'reunioes/form_pre_reuniao.html')
-
-
-def cadastarar_usuario(request):
-    if request.method == "POST":
-        form_usuario = UserCreationForm(request.POST)
-        form_perfil = FormProfile(request.POST)
-        if form_usuario.is_valid():
-            form_usuario.save()
-            return redirect('calendario')
-    else:
-        form_usuario = UserCreationForm()
-    return render(request, 'reunioes/form_cadastro_usuario.html',
-                  {"form_usuario": form_usuario, "form_perfil": form_perfil})
 
 
 def novo_tipo(request):
@@ -162,3 +149,13 @@ def novo_tipo(request):
         return redirect('#')
     else:
         return bad_request(request, None, 'ops_400.html')
+
+
+@login_required()
+def remover(request, id):
+    reuniao_bd = reuniao_service.retornar_reuniao_id(id)
+    print(reuniao_bd)
+    if (request.method == "POST"):
+        reuniao_service.apagar_reuniao(reuniao_bd)
+        return redirect('calendario')
+    return render(request, 'reunioes/excluir.html', {'reuniao_bd': reuniao_bd})

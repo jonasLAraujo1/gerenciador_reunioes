@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base_usr.html' %}
 {% load meus_filtros %}
 {% block titulo %}
 	Cadastrar Usuario
@@ -7,42 +7,36 @@
 	Cadastrar Usuario
 {% endblock nome_pagina %}
 {% block conteudo %}
-	
-	<h2>
-	Cadastre-se
-	</h2>
+	<div class="card" >
+		<div class="card-header">
+
+		 <h5 class="card-title"> Cadastrar Novo Usuario</h5>
+        <p class="card-text">Preencha Todos os campos</p>
+	</div>
+		<div class="card-body">
 	<form  method="post">
 		{% csrf_token %}
 		<div class="form-goup">
 			{{ form_usuario.username.erros }}
 			<label>Nome </label>
-			{{ form_usuario.username}}
+			{{ form_usuario.username|addclass:'form-control'}}
 		</div>
 		<div class="form-goup">
 			{{ form_usuario.password1.erros }}
 			<label>Senha </label>
-			{{ form_usuario.password1}}
+			{{ form_usuario.password1|addclass:'form-control'}}
 		</div>
 		<div class="form-goup">
 			{{ form_usuario.password2.erros }}
 			<label>Confirmação de senha </label>
-			{{ form_usuario.password2}}
+			{{ form_usuario.password2|addclass:'form-control'}}
 		</div>
-		
-		<div class="form-goup">
-			{{ form_usuario.email.erros }}
-			<label>Email </label>
-			{{ form_usuario.email}}
-		</div>
-				<div class="form-goup">
-			{{ form_usuario.registro.erros }}
-			<label>Registro</label>
-			{{ form_usuario.registro}}
-		</div>
-		
+
 		<br>
 		<div class="form-goup">
 			<input type="submit" class="btn btn-sm btn-info" value="Salvar">
 		</div>
-		
+	</form>
+		</div>
+	</div>
 	{% endblock conteudo %}

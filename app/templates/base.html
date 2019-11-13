@@ -52,7 +52,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="navbar-brand" href="./formularios/encerrar.php"><img src="{% static 'app/img/arrow-out-circle.svg'%}" ></a>
+                        <a class="navbar-brand" href="{% url 'deslogar_usuario' %}"><img src="{% static 'app/img/arrow-out-circle.svg'%}" ></a>
                     </li>
                 </ul>
             </div>
@@ -62,7 +62,6 @@
                         <form class="form-inline">
                             <input class='form-control  my-2 my-lg-0' type="search" placeholder='id range' name='busca' required name=busca >
                             <button class=' btn btn-inline-primary my-2 my-sm-0' type='submit'>Buscar</button>
-                            
                         </form>
                     </li>
                 </ul>

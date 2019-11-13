@@ -15,6 +15,8 @@ def alterar_reuniao(reuniao_db,reuniao_nova):
     reuniao_db.status = reuniao_nova.status
     reuniao_db.save(force_update=True)
 
+def apagar_reuniao(reuniao_bd):
+    reuniao_bd.delete()
 
 
 def salvar_tipo(tipo):
