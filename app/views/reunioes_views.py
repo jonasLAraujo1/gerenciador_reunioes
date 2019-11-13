@@ -154,7 +154,6 @@ def novo_tipo(request):
 @login_required()
 def remover(request, id):
     reuniao_bd = reuniao_service.retornar_reuniao_id(id)
-    print(reuniao_bd)
     if (request.method == "POST"):
         reuniao_service.apagar_reuniao(reuniao_bd)
         return redirect('calendario')

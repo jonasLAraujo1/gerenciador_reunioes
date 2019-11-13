@@ -17,7 +17,6 @@ from django.conf.global_settings import DATE_INPUT_FORMATS
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
@@ -27,13 +26,9 @@ SECRET_KEY = '@)f9ux)z+o6b1z4ml9xu)r)4!s&$ztk)(1o)3d$*jr**mm0kto'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-
 import sys
 
-
-
-ALLOWED_HOSTS = ['192.168.137.1','192.168.43.159','192.168.42.74','127.0.0.1']
-
+ALLOWED_HOSTS = ['192.168.137.1', '192.168.43.159', '192.168.42.74', '127.0.0.1']
 
 # Application definition
 
@@ -45,7 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app',
-
 
 ]
 
@@ -80,7 +74,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'gerenciador_reunioes.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
@@ -88,13 +81,12 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'gerenciador_reunioes',
-        'USER':'root',
-        'PASSWORD':'12345',
-        'HOST':'localhost',
-        'PORT':'3306'
+        'USER': 'root',
+        'PASSWORD': '12345',
+        'HOST': 'localhost',
+        'PORT': '3306'
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
@@ -113,8 +105,8 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-DATE_INPUT_FORMATS = ('%Y-%m-%d','%Y-%m-%d')
-TIME_FORMAT =('%H:%M')
+DATE_INPUT_FORMATS = ('%Y-%m-%d', '%Y-%m-%d')
+TIME_FORMAT = ('%H:%M')
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
@@ -128,7 +120,6 @@ USE_I18N = False
 USE_L10N = False
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
