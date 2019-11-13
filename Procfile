@@ -1,1 +1,1 @@
-web: gunicorn gerenciador_reunioes.wsg
+gunicorn gerenciador_reunioes.wsg
