@@ -1,5 +1,5 @@
 from ..models import Reuniao, Tipo
-import simplejson as json
+
 def agendar_reuniao(reuniao):
     Reuniao.objects.create(tipo_reuniao=reuniao.tipo_reuniao,data_reuniao=reuniao.data,pauta=reuniao.pauta,
                            local=reuniao.local,semestre=reuniao.semestre,observacoes=reuniao.observacoes,deliberacoes=reuniao.deliberacoes,status=reuniao.status)
