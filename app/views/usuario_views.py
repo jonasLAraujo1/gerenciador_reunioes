@@ -10,10 +10,9 @@ def cadastarar_usuario(request):
         # form_perfil = FormProfile(request.POST)
         if form_usuario.is_valid():
             form_usuario.save()
-            return redirect('calendario')
+            return redirect('logar_usuario')
     else:
         form_usuario = UserCreationForm()
-        print(form_usuario)
         # form_perfil = FormProfile()
     return render(request, 'usuarios/form_cadastro_usuario.html',
                   {"form_usuario": form_usuario})
