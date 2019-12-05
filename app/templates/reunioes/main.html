@@ -105,7 +105,8 @@
 
 						</nav>
 						<nav class="navbar navbar-light bg-light" >
-							<form class="form-horizontal" method="POST"  action="./ata/gerar_ata.php"> <!-- target=_BLANK -->
+							<form class="form-horizontal" method="POST"  action="{%url 'acao_ata' %}"> <!-- target=_BLANK -->
+                                {% csrf_token %}
 							<input type="hidden" class="form-control" name="id" id="id">
 							<button  class="btn  btn-outline-success" type="submit">Gerar ATA</button>
 						</form>

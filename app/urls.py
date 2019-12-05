@@ -13,10 +13,12 @@ urlpatterns = [
     path('excluir/<int:id>', remover, name="remover"),
     path('marcar/<int:id>',marcar_reuniao,name="marcar_reuniao"),
     path('marcar/',acao_marcar,name="acao_marcar"),
+    path('gerar/',acao_ata,name="acao_ata"),
     path('excluir/',acao_cancelar,name="acao_cancelar"),
     path('cadastro/', cadastarar_usuario, name="cadastarar_usuario"),
     path('login/', logar_usuario, name="logar_usuario"),
     path('logout/', deslogar_usuario, name="deslogar_usuario"),
+    path('ata/<int:id>', ata, name="ata"),
 ]
 
 

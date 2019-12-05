@@ -30,3 +30,10 @@ def acao_cancelar(request):
         return redirect("remover",id)
     else:
         return redirect("calendario")
+@login_required()
+def acao_ata(request):
+    if request.method == "POST":
+        id = request.POST['id']
+        return redirect("ata",id)
+    else:
+        return redirect("calendario")

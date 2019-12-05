@@ -38,7 +38,7 @@ def retornar_tudo():
             'end': fim,
             'title': i.tipo_reuniao.titulo,
             'color': i.tipo_reuniao.get_cor_display,
-            'status': i.status,
+            'status': i.get_status_display,
         })
     return lista_reunioes
 

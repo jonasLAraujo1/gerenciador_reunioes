@@ -2,6 +2,13 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 from django.views.defaults import bad_request
+from django.http import HttpResponse
+from django.template.loader import render_to_string, get_template
+from easy_pdf.rendering import render_to_pdf_response
+
+#import tempfile
+
+#import pdfkit
 
 from ..entidades import reunioes, alertas
 from ..forms import *
@@ -158,3 +165,24 @@ def remover(request, id):
         reuniao_service.apagar_reuniao(reuniao_bd)
         return redirect('calendario')
     return render(request, 'reunioes/excluir.html', {'reuniao_bd': reuniao_bd})
+
+
+@login_required()
+def ata(request, id):
+    reuniao_bd = reuniao_service.retornar_reuniao_id(id)
+    usuario = request.user
+    context = {'reuniao_bd': reuniao_bd,'usuario':usuario}
+    template = 'reunioes/molde001.htm'
+    # html = template.render({'reuniao_bd': reuniao_bd})
+    # options = {
+    #     'page-size': 'Letter',
+    #     'encoding': "UTF-8",
+    # }
+    # pdf = pdfkit.from_string(html, False,options)
+    # response = HttpResponse(pdf, content_type='application/pdf')
+    # response['Content-Disposition'] = 'attachment; filename="person.pdf"'
+    # return response
+    return render_to_pdf_response(request,template,context)
+
+
+
