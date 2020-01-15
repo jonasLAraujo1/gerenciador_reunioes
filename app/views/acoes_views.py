@@ -1,5 +1,7 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect
+from django.core.handlers import exception
+from django.shortcuts import redirect,render
+
 @login_required()
 def acao_marcar(request):
     if request.method == "POST":

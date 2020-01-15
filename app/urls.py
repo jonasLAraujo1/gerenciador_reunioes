@@ -1,11 +1,13 @@
 
-from django.contrib import admin
 from django.urls import path
 
 
 from .views.acoes_views import *
 from .views.reunioes_views import *
-from .views.usuario_views  import *
+from .views.usuario_views import *
+
+
+
 urlpatterns = [
     path('agendar/',agendar_reuniao,name="agendar_reuniao"),
     path('tipo/',agendar_tipo,name="agendar_tipo"),
@@ -19,6 +21,6 @@ urlpatterns = [
     path('login/', logar_usuario, name="logar_usuario"),
     path('logout/', deslogar_usuario, name="deslogar_usuario"),
     path('ata/<int:id>', ata, name="ata"),
-]
-
-
+    ]
+# handler404 = 'app.views.acoes_views.erro_404'
+# handler500 = 'app.views.acoes_views.erro_500'
