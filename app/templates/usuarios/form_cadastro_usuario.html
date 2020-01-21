@@ -16,11 +16,19 @@
 		<div class="card-body">
 	<form  method="post">
 		{% csrf_token %}
+
 		<div class="form-goup">
 			{{ form_usuario.username.erros }}
-			<label>Nome </label>
+			<label>CPF </label>
 			{{ form_usuario.username|addclass:'form-control'}}
 		</div>
+<!--		-->
+<!--		<div class="form-goup">-->
+<!--			<label>Email </label>-->
+<!--			<input class="form-control" type="email",name="email">-->
+<!--		</div>-->
+
+
 		<div class="form-goup">
 			{{ form_usuario.password1.erros }}
 			<label>Senha </label>

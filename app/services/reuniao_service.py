@@ -20,7 +20,7 @@ def apagar_reuniao(reuniao_bd):
 
 
 def salvar_tipo(tipo):
-    Tipo.objects.create(titulo=tipo.titulo, cor=tipo.cor)
+    Tipo.objects.create(titulo=tipo.titulo)
 
 
 def retornar_tudo():
@@ -37,7 +37,7 @@ def retornar_tudo():
             'start': inicio,
             'end': fim,
             'title': i.tipo_reuniao.titulo,
-            'color': i.tipo_reuniao.get_cor_display,
+            'color': i.get_cor_display,
             'status': i.get_status_display,
         })
     return lista_reunioes

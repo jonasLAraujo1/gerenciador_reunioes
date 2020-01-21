@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserCreationForm
+
 from django.shortcuts import render, redirect
 from django.views.defaults import bad_request
 from django.http import HttpResponse

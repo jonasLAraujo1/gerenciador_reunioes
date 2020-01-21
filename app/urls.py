@@ -4,7 +4,6 @@ from django.urls import path
 from django.conf import settings
 from django.template.response import TemplateResponse
 
-
 from .views.acoes_views import *
 from .views.reunioes_views import *
 from .views.usuario_views import *
@@ -20,7 +19,9 @@ if settings.DEBUG:
     path('marcar/',acao_marcar,name="acao_marcar"),
     path('gerar/',acao_ata,name="acao_ata"),
     path('excluir/',acao_cancelar,name="acao_cancelar"),
-    path('cadastro/', cadastarar_usuario, name="cadastarar_usuario"),
+    path('cadastro/', decidir_usuario, name="decidir_usuario"),
+    path('cadastro/aluno', cadastarar_aluno, name="cadastarar_aluno"),
+    path('cadastro/servidor', cadastarar_servidor, name="cadastarar_servidor"),
     path('login/', logar_usuario, name="logar_usuario"),
     path('logout/', deslogar_usuario, name="deslogar_usuario"),
     path('ata/<int:id>', ata, name="ata"),

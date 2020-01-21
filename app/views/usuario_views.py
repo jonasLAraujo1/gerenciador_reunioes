@@ -2,19 +2,45 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.shortcuts import render, redirect
-# from ..forms import FormProfile
+from ..forms import FormUsuario
 
-def cadastarar_usuario(request):
+def decidir_usuario(request):
+    return render(request, 'usuarios/cadastro_usuario.html')
+
+
+def cadastarar_servidor(request):
     if request.method == "POST":
         form_usuario = UserCreationForm(request.POST)
+
         # form_perfil = FormProfile(request.POST)
         if form_usuario.is_valid():
             form_usuario.save()
             return redirect('logar_usuario')
     else:
         form_usuario = UserCreationForm()
-        # form_perfil = FormProfile()
-    return render(request, 'usuarios/form_cadastro_usuario.html',
+
+    return render(request, 'usuarios/form_cadastro_servidor.html',
+                  {"form_usuario": form_usuario})
+
+
+def cadastarar_aluno(request):
+    if request.method == "POST":
+        form_usuario = UserCreationForm(request.POST)
+
+        # form_perfil = FormProfile(request.POST)
+        if form_usuario.is_valid():
+            #form_usuario.username
+            #print(form_usuario.username)
+            #user = User.objects.create_user('john', 'lennon@thebeatles.com', 'johnpassword')
+            nome = request.POST['nome_usuario']
+            email = request.POST['email_usuario']
+            #print(form_usuario.username,nome,email)
+            #form_usuario.save()
+            #return redirect('logar_usuario')
+    else:
+        form_usuario = UserCreationForm()
+        #form_usuario2 = FormUsuario(request.POST)
+    return render(request, 'usuarios/form_cadastro_aluno.html',
                   {"form_usuario": form_usuario})
 
 def logar_usuario(request):
