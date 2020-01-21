@@ -1,0 +1,65 @@
+{% extends 'base_usr.html' %}
+{% load meus_filtros %}
+{% block titulo %}
+	Cadastrar Usuario
+{% endblock titulo %}
+{% block nome_pagina %}
+	Cadastrar Usuario
+{% endblock nome_pagina %}
+{% block conteudo %}
+	<div class="card" >
+		<div class="card-header">
+
+		 <h5 class="card-title"> Cadastrar Servidor</h5>
+        <p class="card-text">Preencha Todos os campos</p>
+	</div>
+		<div class="card-body">
+	<form  method="post">
+		{% csrf_token %}
+		<div class="form-goup">
+			<label>Nome Completo </label>
+			<input type="text" name="nome_usuario" required name=nome_usuario class="form-control">
+
+		</div>
+			<div class="form-goup">
+			{{ form_usuario.username.erros }}
+			<label>CPF </label>
+			{{ form_usuario.username|addclass:'form-control'}}
+		</div>
+
+		<div class="form-goup">
+			<label>Email </label>
+			<input type="email" name="email_usuario" required name=email_usuario class="form-control">
+		</div>
+		<div class="form-goup">
+			<label>SIAPE </label>
+			<input type="text" name="registro_usuario" required name=registro_usuario class="form-control">
+		</div>
+		<div class="form-goup">
+			<label>Cargo </label>
+			<input type="text" name="cargo_usuario" required name=cargo_usuario class="form-control">
+		</div>
+
+		<div class="form-goup">
+			<label>Função </label>
+			<input type="text" name="funcao_usuario" class="form-control">
+		</div>
+
+		<div class="form-goup">
+			{{ form_usuario.password1.erros }}
+			<label>Senha </label>
+			{{ form_usuario.password1|addclass:'form-control'}}
+		</div>
+		<div class="form-goup">
+			{{ form_usuario.password2.erros }}
+			<label>Confirmação de senha </label>
+			{{ form_usuario.password2|addclass:'form-control'}}
+		</div>
+		<br>
+		<div class="form-goup">
+			<input type="submit" class="btn btn-sm btn-info" value="Salvar">
+		</div>
+	</form>
+		</div>
+	</div>
+	{% endblock conteudo %}
