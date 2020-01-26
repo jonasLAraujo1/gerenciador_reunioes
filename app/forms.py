@@ -2,7 +2,6 @@ from django import forms
 from .models import *
 from datetime import date
 
-
 class  DateInput(forms.DateInput):
     """docstring for  DateInput"""
     input_type = 'date'
@@ -12,12 +11,12 @@ class  TimeInput(forms.TimeInput):
     """docstring for  TimeInput"""
     input_type = 'time'
 
-
 class FormAgendaReuniao(forms.ModelForm):
     tipo_reuniao = forms.ModelChoiceField(queryset=Tipo.objects.all())
+    participantes =forms.ModelMultipleChoiceField(queryset=User.objects.all())
     class Meta:
         model = Reuniao
-        fields = ['tipo_reuniao','pauta','local','semestre']
+        fields = ['tipo_reuniao','pauta','local','semestre','participantes']
 
 class FormUsuario(forms.ModelForm):
     class Meta:

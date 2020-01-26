@@ -25,8 +25,7 @@
 		<div class="form-goup">
 		 <a class="navbar-brand" href="{% url 'agendar_tipo' %}">Novo Tipo</a>
 		</div>
-
-<div class="form-goup form-inline">
+		<div class="form-goup form-inline">
 			{{ form_data.dia.erros }}
 			<dl>Data
 				<dt>{{ form_data.dia|addclass:'form-control'}} </dt></dl>
@@ -64,6 +63,11 @@
 				{{ form_reuniao.semestre.erros }}
 				<label>Semestre</label>
 				{{ form_reuniao.semestre|addclass:'form-control' }}
+			</div>
+		<div class="form-goup">
+				{{ form_reuniao.participantes.erros }}
+				<label>Participantes</label>
+				{{ form_reuniao.participantes|addclass:'form-control' }}
 			</div>
 			<br>
 			<div class="form-goup">

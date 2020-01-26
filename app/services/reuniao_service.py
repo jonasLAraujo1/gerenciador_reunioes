@@ -1,8 +1,13 @@
+from ..models import User
 from ..models import Reuniao, Tipo
 
 def agendar_reuniao(reuniao):
-    Reuniao.objects.create(tipo_reuniao=reuniao.tipo_reuniao,data_reuniao=reuniao.data,pauta=reuniao.pauta,
+    reuniao_bd=Reuniao.objects.create(tipo_reuniao=reuniao.tipo_reuniao,data_reuniao=reuniao.data,pauta=reuniao.pauta,
                            local=reuniao.local,semestre=reuniao.semestre,observacoes=reuniao.observacoes,deliberacoes=reuniao.deliberacoes,status=reuniao.status)
+    reuniao_bd.save()
+    for i in reuniao.participantes:
+        usuario= User.objects.get(id=i.id)
+        reuniao_bd.participantes.add(usuario)
 
 def alterar_reuniao(reuniao_db,reuniao_nova):
     reuniao_db.tipo_reuniao=reuniao_nova.tipo_reuniao

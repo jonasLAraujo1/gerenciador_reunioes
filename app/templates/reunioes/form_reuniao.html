@@ -62,6 +62,11 @@
 				<label>Semestre</label>
 				{{ form_reuniao.semestre|addclass:'form-control' }}
 			</div>
+		<div class="form-goup">
+				{{ form_reuniao.participantes.erros }}
+				<label>Participantes</label>
+				{{ form_reuniao.participantes|addclass:'form-control' }}
+			</div>
         <div class="form-goup">
 				{{ form_reuniao.deliberacoes.erros }}
 				<label>Deliberações</label>

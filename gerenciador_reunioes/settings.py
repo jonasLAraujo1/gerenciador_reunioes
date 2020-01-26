@@ -14,6 +14,7 @@ import os
 import django_heroku
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 from django.conf.global_settings import DATE_INPUT_FORMATS
+from django.utils.translation import gettext_noop
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -40,6 +41,7 @@ INSTALLED_APPS = [
 
 ]
 AUTH_USER_MODEL = 'app.User'
+
 LOGIN_URL = 'logar_usuario'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -77,7 +79,7 @@ WSGI_APPLICATION = 'gerenciador_reunioes.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'gerenciador_reunioes',
+        'NAME': 'reunioes',
         'USER': 'root',
         'PASSWORD': '12345',
         'HOST': 'localhost',

@@ -1,47 +1,51 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import render, redirect
-from ..forms import FormUsuario
+#from ..forms import UserForm
+from ..models import User
+from ..admin import UserCreationForm,UserCreationForm2
+
 
 def decidir_usuario(request):
     return render(request, 'usuarios/cadastro_usuario.html')
 
 
 def cadastarar_servidor(request):
+    mensagem = ""
     if request.method == "POST":
-        form_usuario = UserCreationForm(request.POST)
+        form_usuario = UserCreationForm2(request.POST)
 
-        # form_perfil = FormProfile(request.POST)
         if form_usuario.is_valid():
+            # matricula = form_usuario.cleaned_data['registro']
             form_usuario.save()
             return redirect('logar_usuario')
+        else:
+            mensagem = form_usuario.errors
     else:
-        form_usuario = UserCreationForm()
+        form_usuario = UserCreationForm2()
 
     return render(request, 'usuarios/form_cadastro_servidor.html',
-                  {"form_usuario": form_usuario})
-
+                  {"form_usuario": form_usuario, 'mensagem': mensagem})
 
 def cadastarar_aluno(request):
+    mensagem = ""
     if request.method == "POST":
         form_usuario = UserCreationForm(request.POST)
 
-        # form_perfil = FormProfile(request.POST)
+
         if form_usuario.is_valid():
-            #form_usuario.username
-            #print(form_usuario.username)
-            #user = User.objects.create_user('john', 'lennon@thebeatles.com', 'johnpassword')
-            nome = request.POST['nome_usuario']
-            email = request.POST['email_usuario']
-            #print(form_usuario.username,nome,email)
-            #form_usuario.save()
-            #return redirect('logar_usuario')
+            #matricula=form_usuario.cleaned_data['registro']
+
+            form_usuario.save()
+            return redirect('logar_usuario')
+        else:
+            mensagem=form_usuario.errors
     else:
         form_usuario = UserCreationForm()
-        #form_usuario2 = FormUsuario(request.POST)
+    print(mensagem)
     return render(request, 'usuarios/form_cadastro_aluno.html',
-                  {"form_usuario": form_usuario})
+                  {"form_usuario": form_usuario,'mensagem':mensagem})
 
 def logar_usuario(request):
     if request.method == "POST":

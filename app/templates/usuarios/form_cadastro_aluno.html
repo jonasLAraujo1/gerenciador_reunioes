@@ -15,20 +15,41 @@
 	</div>
 		<div class="card-body">
 	<form  method="post">
-		{% csrf_token %}
-		<div class="form-goup">
-			<label>Nome Completo</label>
-			<input type="text" name="nome_usuario" required name=nome_usuario class="form-control">
 
+		{% csrf_token %}
+<!--		{% for message in mensagem%}-->
+
+<!--		<div class="alert alert-danger">-->
+<!--			{{message}}-->
+<!--		</div>-->
+
+<!--		{%endfor%}-->
+
+{%if mensagem%}
+
+		<div class="alert alert-danger">
+		{% for key, value in mensagem.items%}
+
+		{{ value }}
+
+		{%endfor%}
+			</div>
+{%endif%}
+		<div class="form-goup">
+			{{ form_usuario.nome.erros }}
+			<label>Nome Completo </label>
+			{{ form_usuario.nome|addclass:'form-control'}}
 		</div>
 		<div class="form-goup">
+			{{ form_usuario.email.erros }}
 			<label>Email </label>
-			<input type="email" name="email_usuario" required name=email_usuario class="form-control">
+			{{ form_usuario.email|addclass:'form-control'}}
 		</div>
+
 		<div class="form-goup">
-			{{ form_usuario.username.erros }}
+			{{  form_usuario.registro.erros }}
 			<label>Matricula </label>
-			{{ form_usuario.username|addclass:'form-control'}}
+			{{ form_usuario.registro|addclass:'form-control'}}
 		</div>
 		<div class="form-goup">
 			{{ form_usuario.password1.erros }}

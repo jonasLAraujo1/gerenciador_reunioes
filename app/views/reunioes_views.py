@@ -22,7 +22,6 @@ def agendar_reuniao(request):
     if request.method == "POST":
         form_data = FormData(request.POST)
         form_reuniao = FormAgendaReuniao(request.POST)
-
         if form_data.is_valid():
             dia = form_data.cleaned_data["dia"]
             inicio = form_data.cleaned_data["inicio"]
@@ -34,13 +33,15 @@ def agendar_reuniao(request):
                 pauta = form_reuniao.cleaned_data["pauta"]
                 local = form_reuniao.cleaned_data["local"]
                 semestre = form_reuniao.cleaned_data["semestre"]
+                participantes = form_reuniao.cleaned_data["participantes"]
+
                 deliberacoes = ""
                 observacoes = ""
                 status = "1"
                 data_bd = data_services.salvar_data(nova_data)
                 nova_reuniao = reunioes.Reuniao(tipo_reuniao=tipo, data=data_bd, pauta=pauta, local=local,
-                                                semestre=semestre, observacoes=observacoes, deliberacoes=deliberacoes,
-                                                status=status)
+                                                semestre=semestre,participantes=participantes, observacoes=observacoes, deliberacoes=deliberacoes,
+                                                cor="1",status=status)
                 reuniao_service.agendar_reuniao(nova_reuniao)
                 observacoes = "Uma nova Reunião com a Pauta: " + str(pauta) + \
                               " Foi Agendada Para o Dia: " + str(dia) + " com  previsão de Inicioa as " + str(inicio)
@@ -131,8 +132,8 @@ def agendar_tipo(request):
         form_tipo = FormTipo(request.POST)
         if form_tipo.is_valid():
             titulo = form_tipo.cleaned_data["titulo"]
-            cor = form_tipo.cleaned_data["cor"]
-            novo_tipo = reunioes.Tipo(titulo=titulo, cor=cor)
+
+            novo_tipo = reunioes.Tipo(titulo=titulo)
             reuniao_service.salvar_tipo(novo_tipo)
             return redirect('agendar_reuniao')
     else:
