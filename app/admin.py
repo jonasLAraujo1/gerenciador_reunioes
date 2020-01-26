@@ -37,6 +37,7 @@ class UserCreationForm2(forms.ModelForm):
     fields, plus a repeated password."""
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
     password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput)
+    REQUIRED_FIELDS = ['email','nome', 'registro','cpf','cargo','lotacao']
 
     class Meta:
         model = User

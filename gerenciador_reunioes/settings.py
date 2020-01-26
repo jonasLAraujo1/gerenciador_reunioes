@@ -109,9 +109,9 @@ TIME_FORMAT = ('%H:%M')
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-LANGUAGE_CODE = 'pt-br'
+TIME_ZONE = 'America/Chicago'
+LANGUAGE_CODE = 'pt-BR'
 
-TIME_ZONE = 'UTC'
 
 USE_I18N = False
 

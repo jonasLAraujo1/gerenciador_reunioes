@@ -35,6 +35,33 @@
         <div class="container"  style="background-color: #fff">
             {% block conteudo %}
             {% endblock conteudo %}
+            <div class="modal fade" id="cad_tipo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title text-center">Usuário Cadastrado com Sucesso</h3>
+
+            </div>
+            <div class="modal-body">
+                <dl class="dl-horizontal">
+					<center>
+                    <dt><a class="navbar-brand" href="{% url 'logar_usuario' %}"><button class='btn btn-success btn-lg btn-outline' type='button' >OK</button>
+                        </a></dt>
+
+						</center>
+                </dl>
+            </div>
+            <div class="modal-content">
+                <div class="modal-body">
+                    <nav class="navbar navbar-light bg-light">
+                        </form>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
         </div>
 
     </div>

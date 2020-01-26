@@ -59,17 +59,18 @@ class User(AbstractBaseUser):
         unique=True,
     )
     nome = models.CharField(max_length=120, null=False, blank=False)
-    registro = models.CharField(max_length=11, null=False, blank=False)
-    cpf = models.CharField(max_length=11, null=True, blank=True)
+    registro = models.CharField(max_length=11, null=False, blank=False, unique=True,)
+    cpf = models.CharField(max_length=11, null=False, blank=False, unique=True)
     funcao = models.CharField(max_length=35, null=True, blank=True)
-    cargo = models.CharField(max_length=50, null=True, blank=True)
-    lotacao = models.CharField(max_length=35, null=True, blank=True)
+    cargo = models.CharField(max_length=50,null=False, blank=False,)
+    lotacao = models.CharField(max_length=35,null=False, blank=False,)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['nome','regsitro']
+    REQUIRED_FIELDS = ['nome','regsitro', 'cpf', 'cargo', 'lotacao']
+
 
     def __str__(self):
         return self.nome

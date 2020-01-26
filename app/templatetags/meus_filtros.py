@@ -6,6 +6,7 @@ def addclass(value, arg):
 	return value.as_widget(attrs={'class': arg})
 
 
+
 @register.filter(name='retorna')
 def retorna(value,arg):
 	return value.as_widget(attrs={arg})

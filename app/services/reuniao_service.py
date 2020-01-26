@@ -50,3 +50,4 @@ def retornar_tudo():
 def  retornar_reuniao_id(id):
     reunioes = Reuniao.objects.get(id=id)
     return reunioes
+

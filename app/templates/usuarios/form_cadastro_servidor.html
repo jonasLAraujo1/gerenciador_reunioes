@@ -11,9 +11,16 @@
 		<div class="card-header">
 
 		 <h5 class="card-title"> Cadastrar Servidor</h5>
-        <p class="card-text">Preencha Todos os campos</p>
+        <p class="card-text">Insira Seus Dados</p>
 	</div>
 		<div class="card-body">
+			{% if sucesso %}
+				<script type="text/javascript">
+				$(document).ready(function() {
+				$('#cad_tipo').modal('show');
+				})
+				</script>
+			{% endif %}
 	<form  method="post">
 
 		{% csrf_token %}
@@ -91,4 +98,5 @@
 	</form>
 		</div>
 	</div>
+
 	{% endblock conteudo %}
