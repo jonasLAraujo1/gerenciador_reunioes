@@ -10,8 +10,6 @@ from time import sleep
 def decidir_usuario(request):
     return render(request, 'usuarios/cadastro_usuario.html')
 
-def sucesso_usuario(request):
-    return render(request, 'usuarios/sucesso.html')
 
 def cadastarar_servidor(request):
     mensagem = ""

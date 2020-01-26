@@ -91,22 +91,7 @@ class User(AbstractBaseUser):
         # Simplest possible answer: All admins are staff
         return self.is_admin
 
-
-
-# class User(AbstractUser):
-#     nome = models.CharField(max_length=120, null=False, blank=False)
-#     registro = models.CharField(max_length=11, null=True, blank=True)
-#     email = models.EmailField(null=False, blank=False)
-#     funcao = models.CharField(max_length=35, null=True, blank=True)
-#     cargo = models.CharField(max_length=50, null=True, blank=True)
-#     lotacao = models.CharField(max_length=35, null=True, blank=True)
-
-# Create your models here.
-from django.utils import timezone
-
-
 class Tipo(models.Model):
-
     titulo = models.CharField(max_length=120, null=False, blank=False)
 
     def __str__(self):
@@ -118,13 +103,6 @@ class Data(models.Model):
     inicio = models.TimeField(null=False, blank=False)
     fim = models.TimeField(null=False, blank=False)
 
-
-# class Profile(models.Model):
-#     user = models.OneToOneField(User, related_name='profile', on_delete=models.CASCADE)
-#     registro = models.CharField(max_length=11)
-#     funcao = models.CharField(max_length=35, null=True, blank=True)
-#     cargo = models.CharField(max_length=50, null=True, blank=True)
-#     lotacao = models.CharField(max_length=35, null=True, blank=True)
 
 
 class Reuniao(models.Model):
@@ -150,6 +128,7 @@ class Reuniao(models.Model):
     deliberacoes = models.TextField(null=True, blank=True)
     status = models.CharField(max_length=1, choices=STATUS_CHOICES, default="1", null=False, blank=False)
     cor = models.CharField(max_length=1, choices=COR_CHOICES,default="1", null=False, blank=False)
+
 
 class Alerta(models.Model):
     STATUS_CHOICES = (

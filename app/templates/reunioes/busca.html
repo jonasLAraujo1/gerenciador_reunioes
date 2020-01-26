@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load meus_filtros %}
+{% block titulo %}
+	{{ titulo }}
+{% endblock titulo %}
+{% block nome_pagina %}
+	Resultados da Busca
+{% endblock nome_pagina %}
+
+{% block conteudo %}
+
+
+{% if not resultados %}
+<center>
+<div class="card w-50 ">
+	<div class="card-body">
+	<div class="card text-center">
+		<div class="card-header">
+			<h3 class="card-title">Algo Errado Com Sua Busca</h3>
+		</div>
+		<div class="card-body">
+			<h4 class="card-text">Nenhum Resultado Para Busca "{{semestre}}"</h4>
+		</div>
+	</div>
+	</div>
+</div>
+</center>
+{%else%}
+<div class="row">
+{%for resultado in resultados%}
+
+		<div class="col-sm-6">
+			<div class="card ">
+				<div class="card-body">
+			<div class="card border-success" >
+				<div class="card-header">
+					<h3 class="card-title">Tipo: {{resultado.tipo_reuniao.titulo}}</h3>
+						<h5 class="card-text">Data: {{resultado.data_reuniao.dia|date:"d/m/Y"}}
+							Inicio: {{resultado.data_reuniao.inicio|date:'H:i'}}
+							Fim: {{resultado.data_reuniao.fim|date:'H:i'}}
+							<br>
+							Status: {{resultado.get_status_display}}
+							<br>
+							{{resultado.id}}
+				</h5>
+
+				</div>
+				<div class="card-body">
+					<nav class="navbar navbar-light bg-light" >
+						<form class="form-horizontal" method="POST" action="{%url 'acao_marcar' %}">
+							{% csrf_token %}
+							<input type="hidden" class="form-control" name="id" value={{resultado.id}}>
+
+							<button  class="btn btn-outline-success " type="submit">Confirmar</button>
+						</form>
+						<form class="form-horizontal" method="POST" action="{%url 'acao_marcar' %}">
+							{% csrf_token %}
+							<input type="hidden" class="form-control" name="id" value={{resultado.id}}>
+
+							<button  class="btn btn-outline-success " type="submit">Alterar</button>
+						</form>
+
+
+						<form class="form-horizontal" method="POST" action="{%url 'acao_marcar' %}">
+							{% csrf_token %}
+							<input type="hidden" class="form-control" name="id"  value={{resultado.id}}>
+							<button  class="btn btn-outline-success " type="submit">Consolidar</button>
+						</form>
+						<form class="form-horizontal" method="POST" action="{%url 'acao_cancelar' %}">
+							{% csrf_token %}
+							<input type="hidden" class="form-control" name="id"  value={{resultado.id}}>
+							<button  class="btn btn-outline-success " type="submit">Cancelar</button>
+						</form>
+						<form class="form-horizontal" method="POST" action="{%url 'acao_ata' %}">
+							{% csrf_token %}
+							<input type="hidden" class="form-control" name="id"  value={{resultado.id}}>
+							<button  class="btn btn-outline-success " type="submit">Gerar Ata</button>
+						</form>
+					</nav>
+				</div>
+			</div>
+		</div>
+			</div>
+		</div>
+
+{%endfor%}
+
+  </div>
+
+{% endif %}
+{% endblock conteudo %}

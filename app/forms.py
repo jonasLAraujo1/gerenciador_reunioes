@@ -47,7 +47,9 @@ class FormData(forms.ModelForm):
 #
 
 class FormReuniao(forms.ModelForm):
+    tipo_reuniao = forms.ModelChoiceField(queryset=Tipo.objects.all())
+    participantes = forms.ModelMultipleChoiceField(queryset=User.objects.all())
     class Meta:
         model = Reuniao
-        fields = ['tipo_reuniao','pauta','local','semestre','deliberacoes','observacoes']
+        fields = ['tipo_reuniao','pauta','local','participantes','semestre','deliberacoes','observacoes']
 

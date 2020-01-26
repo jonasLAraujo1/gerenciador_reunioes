@@ -2,13 +2,9 @@ from django.contrib.auth.decorators import login_required
 
 from django.shortcuts import render, redirect
 from django.views.defaults import bad_request
-from django.http import HttpResponse
-from django.template.loader import render_to_string, get_template
 from easy_pdf.rendering import render_to_pdf_response
 
-#import tempfile
 
-#import pdfkit
 
 from ..entidades import reunioes, alertas
 from ..forms import *
@@ -77,13 +73,16 @@ def marcar_reuniao(request, id):
             pauta = form_reuniao.cleaned_data["pauta"]
             local = form_reuniao.cleaned_data["local"]
             semestre = form_reuniao.cleaned_data["semestre"]
+            participantes = form_reuniao.cleaned_data["participantes"]
             deliberacoes = form_reuniao.cleaned_data["deliberacoes"]
             observacoes = form_reuniao.cleaned_data["observacoes"]
             status = "2"
+            cor="2"
+
             data_services.alterar_data(data_bd, nova_data)
             nova_reuniao = reunioes.Reuniao(tipo_reuniao=tipo, data=data_bd, pauta=pauta, local=local,
-                                            semestre=semestre, observacoes=observacoes, deliberacoes=deliberacoes,
-                                            status=status)
+                                            semestre=semestre,participantes=participantes, observacoes=observacoes, deliberacoes=deliberacoes,
+                                            status=status,cor=cor)
             reuniao_service.alterar_reuniao(reuniao_bd, nova_reuniao)
             return redirect('calendario')
     return render(request, 'reunioes/form_reuniao.html',
@@ -110,13 +109,15 @@ def consolidar_reuniao(request, id):
             pauta = form_reuniao.cleaned_data["pauta"]
             local = form_reuniao.cleaned_data["local"]
             semestre = form_reuniao.cleaned_data["semestre"]
+            participantes=form_reuniao.cleaned_data["participantes"]
             deliberacoes = form_reuniao.cleaned_data["deliberacoes"]
             observacoes = form_reuniao.cleaned_data["observacoes"]
             status = "3"
+            cor="3"
             data_services.alterar_data(data_bd, nova_data)
             nova_reuniao = reunioes.Reuniao(tipo_reuniao=tipo, data=data_bd, pauta=pauta, local=local,
-                                            semestre=semestre, observacoes=observacoes, deliberacoes=deliberacoes,
-                                            status=status)
+                                            semestre=semestre,participantes=participantes,
+                                            observacoes=observacoes, deliberacoes=deliberacoes,cor=cor,status=status)
             reuniao_service.alterar_reuniao(reuniao_bd, nova_reuniao)
             return redirect('calendario')
     return render(request, 'reunioes/form_reuniao.html',
@@ -146,9 +147,15 @@ def agendar_tipo(request):
 def calendario(request):
     notificacao = ""
     reunioes = reuniao_service.retornar_tudo()
-    # print(reunioes)
     return render(request, 'reunioes/main.html', {"reunioes": reunioes, "notificacao": notificacao})
 
+@login_required()
+def resultado_busca(request):
+    notificacao = ""
+    if request.method == "POST":
+        semestre = request.POST['busca']
+        resultados = reuniao_service.retornar_por_semestre(semestre)
+    return render(request, 'reunioes/busca.html', { "notificacao": notificacao,"resultados":resultados,"semestre":semestre})
 
 def novo_tipo(request):
     form = FormTipo(request.POST)

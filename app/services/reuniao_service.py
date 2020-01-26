@@ -17,6 +17,8 @@ def alterar_reuniao(reuniao_db,reuniao_nova):
     reuniao_db.semestre = reuniao_nova.semestre
     reuniao_db.observacoes = reuniao_nova.observacoes
     reuniao_db.deliberacoes = reuniao_nova.deliberacoes
+    reuniao_db.cor = reuniao_nova.cor
+    reuniao_db.participantes.set(reuniao_nova.participantes)
     reuniao_db.status = reuniao_nova.status
     reuniao_db.save(force_update=True)
 
@@ -27,6 +29,9 @@ def apagar_reuniao(reuniao_bd):
 def salvar_tipo(tipo):
     Tipo.objects.create(titulo=tipo.titulo)
 
+def retornar_por_semestre(semestre):
+    resultado = Reuniao.objects.all().filter(semestre=semestre)
+    return resultado
 
 def retornar_tudo():
     reunioes = Reuniao.objects.select_related('data_reuniao').all()
