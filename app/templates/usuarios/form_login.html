@@ -11,7 +11,7 @@
 		<div class="card-header">
 
 		 <h5 class="card-title"> Logar no Sistema</h5>
-        <p class="card-text">Entre com suas credênciais</p>
+        <p class="card-text">Entre com suas credenciais</p>
 	</div>
 		<div class="card-body">
 			<form  method="post">
@@ -23,7 +23,7 @@
 		{%endfor%}
 		<div class="form-goup">
 			{{ form_usuario.username.erros }}
-			<label>Nome do Usuario</label>
+			<label>Email</label>
 			{{ form_login.username|addclass:'form-control'}}
 		</div>
 		<div class="form-goup">
@@ -38,4 +38,7 @@
 		</form>
 </div>
 	</div>
+
+
+
 	{% endblock conteudo %}

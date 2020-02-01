@@ -14,6 +14,7 @@ if settings.DEBUG:
         path('agendar/', agendar_reuniao, name="agendar_reuniao"),
         path('tipo/', agendar_tipo, name="agendar_tipo"),
         path('inicio/', calendario, name="calendario"),
+        path('cancelar/<int:id>', cancelar, name="cancelar"),
         path('excluir/<int:id>', remover, name="remover"),
         path('marcar/<int:id>', marcar_reuniao, name="marcar_reuniao"),
         path('consolidar/<int:id>', consolidar_reuniao, name="consolidar_reuniao"),
@@ -22,7 +23,8 @@ if settings.DEBUG:
         #path('busca/', acao_busca, name="acao_busca"),
         path('busca/', resultado_busca, name="resultado_busca"),
         path('gerar/', acao_ata, name="acao_ata"),
-        path('excluir/', acao_cancelar, name="acao_cancelar"),
+        path('excluir/', acao_remover, name="acao_remover"),
+        path('cancelar/', acao_cancelar, name="acao_cancelar"),
         path('ata/<int:id>', ata, name="ata"),
     ]
     urls_usuario = [

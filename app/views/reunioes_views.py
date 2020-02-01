@@ -145,6 +145,8 @@ def agendar_tipo(request):
 
 @login_required()
 def calendario(request):
+    if request.method == "POST":
+        pass
     notificacao = ""
     reunioes = reuniao_service.retornar_tudo()
     return render(request, 'reunioes/main.html', {"reunioes": reunioes, "notificacao": notificacao})
@@ -172,24 +174,26 @@ def remover(request, id):
     if (request.method == "POST"):
         reuniao_service.apagar_reuniao(reuniao_bd)
         return redirect('calendario')
-    return render(request, 'reunioes/excluir.html', {'reuniao_bd': reuniao_bd})
+    acao="Excluir"
+    return render(request, 'reunioes/excluir.html', {'reuniao_bd': reuniao_bd,"acao":acao})
 
+def cancelar(request, id):
+    reuniao_bd = reuniao_service.retornar_reuniao_id(id)
+    if (request.method == "POST"):
+        reuniao_service.alt(reuniao_bd)
+        return redirect('calendario')
+    acao = "Cancelar"
+    return render(request, 'reunioes/excluir.html', {'reuniao_bd': reuniao_bd,"acao":acao})
 
 @login_required()
 def ata(request, id):
-    reuniao_bd = reuniao_service.retornar_reuniao_id(id)
+    reuniao = reuniao_service.retornar_reuniao_id(id)
     usuario = request.user
-    context = {'reuniao_bd': reuniao_bd,'usuario':usuario}
-    template = 'reunioes/molde001.htm'
-    # html = template.render({'reuniao_bd': reuniao_bd})
-    # options = {
-    #     'page-size': 'Letter',
-    #     'encoding': "UTF-8",
-    # }
-    # pdf = pdfkit.from_string(html, False,options)
-    # response = HttpResponse(pdf, content_type='application/pdf')
-    # response['Content-Disposition'] = 'attachment; filename="person.pdf"'
-    # return response
+    template = 'documentos/modelo_ata.htm'
+    participantes=reuniao.participantes.all()
+
+    context = {'reuniao': reuniao,'usuario':usuario,'participantes':participantes}
+    # template = 'reunioes/molde001.htm'
     return render_to_pdf_response(request,template,context)
 
 

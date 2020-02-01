@@ -1,4 +1,6 @@
 from django import forms
+from django.forms import CheckboxSelectMultiple
+
 from .models import *
 from datetime import date
 
@@ -13,7 +15,7 @@ class  TimeInput(forms.TimeInput):
 
 class FormAgendaReuniao(forms.ModelForm):
     tipo_reuniao = forms.ModelChoiceField(queryset=Tipo.objects.all())
-    participantes =forms.ModelMultipleChoiceField(queryset=User.objects.all())
+    participantes = forms.ModelMultipleChoiceField(queryset=User.objects.all())
     class Meta:
         model = Reuniao
         fields = ['tipo_reuniao','pauta','local','semestre','participantes']

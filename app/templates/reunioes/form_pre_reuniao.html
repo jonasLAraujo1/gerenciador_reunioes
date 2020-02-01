@@ -12,6 +12,7 @@
 	<h2>
 	Solicitar Uma Nova Reunião
 	</h2>
+<small class="form-text  text-danger" >Todos os campos são Obrigatórios</small>
 	<form  method="post">
 		{% csrf_token %}
 
@@ -56,26 +57,40 @@
 			<div class="form-goup">
 				{{ form_reuniao.local.erros }}
 				<label>Local</label>
+				<small class="form-text">Local que ocorrerá a reunião </small>
 				{{ form_reuniao.local|addclass:'form-control' }}
 			</div>
 
 			<div class="form-goup">
 				{{ form_reuniao.semestre.erros }}
 				<label>Semestre</label>
+				<small class="form-text">Informe ano e semestre letivo separados por ponto, exemplo: 2019.2</small>
 				{{ form_reuniao.semestre|addclass:'form-control' }}
 			</div>
+
 		<div class="form-goup">
+			<label>Participantes</label>
+			<small class="form-text bg-info text-white" >Mantenha a tecla Ctrl pressionada para selecionar vários</small>
 				{{ form_reuniao.participantes.erros }}
-				<label>Participantes</label>
 				{{ form_reuniao.participantes|addclass:'form-control' }}
-			</div>
+		</div>
+<!--<div class="form-goup">-->
+<!--			<label>Participantes</label>-->
+<!--			<div class="form-check ">-->
+<!--			{% for radio in form_reuniao.participantes %}-->
+<!--				<input type="checkbox" class="form-check-input" id="exampleCheck1">-->
+<!--				<label class="form-check-label" for="exampleCheck1">Check me out</label><br>-->
+
+<!--				{% endfor %}-->
+
+<!--			</div>-->
+<!--</div>-->
+
+
 			<br>
 			<div class="form-goup">
 				<input type="submit" class="btn btn-sm btn-info" value="Salvar">
 			</div>
-
-
-
 
 
 	</form>

@@ -2,6 +2,7 @@
 <html lang="pt-br">
     {%load static %}
     <head>
+
         <meta charset="UTF-8">
         <title>
         {% block titulo %}
@@ -11,10 +12,13 @@
         <link rel="stylesheet" href="{% static 'app/css/bootstrap.css'%}" />
         <script src="{% static 'app/js/jquery.min.js'%}"></script>
         <script src="{% static 'app/js/bootstrap.min.js'%}"></script>
+
         {% block extras %}
         {% endblock extras %}
+
     </head>
-    <body>
+
+    <body >
         <header class="navbar navbar-dark flex-column flex-md-row " style='background-color: #28a745'>
             <div class="navbar" >
                 <ul class="nav justify-content-center">
@@ -30,12 +34,13 @@
 
             </div>
         </header>
-    <div class="container-fluid" style="background-color: #81C784">
-
+    <div class="container-fluid" style=" background-color: #81C784;">
         <div class="container"  style="background-color: #fff">
             {% block conteudo %}
             {% endblock conteudo %}
-            <div class="modal fade" id="cad_tipo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        </div>
+    </div>
+        <div class="modal fade" id="cad_tipo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
      data-backdrop="static">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -65,7 +70,5 @@
         </div>
 
     </div>
-</div>
-</div>
 </body>
 </html>

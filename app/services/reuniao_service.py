@@ -21,6 +21,12 @@ def alterar_reuniao(reuniao_db,reuniao_nova):
     reuniao_db.participantes.set(reuniao_nova.participantes)
     reuniao_db.status = reuniao_nova.status
     reuniao_db.save(force_update=True)
+def alt(reuniao_db):
+    reuniao_db.cor = "4"
+
+    reuniao_db.status = "4"
+    reuniao_db.save(force_update=True)
+
 
 def apagar_reuniao(reuniao_bd):
     reuniao_bd.delete()
@@ -35,6 +41,25 @@ def retornar_por_semestre(semestre):
 
 def retornar_tudo():
     reunioes = Reuniao.objects.select_related('data_reuniao').all()
+    lista_reunioes = []
+    for i in reunioes:
+        data_i = i.data_reuniao.dia.strftime('%Y-%m-%d')
+        hora_i = i.data_reuniao.inicio.strftime('%H:%M:%S')
+        hora_f = i.data_reuniao.fim.strftime('%H:%M:%S')
+        inicio = data_i + ' ' + hora_i
+        fim = data_i + ' ' + hora_f
+        lista_reunioes.append({
+            'id': i.id,
+            'start': inicio,
+            'end': fim,
+            'title': i.tipo_reuniao.titulo,
+            'color': i.get_cor_display,
+            'status': i.get_status_display,
+        })
+    return lista_reunioes
+def retornar_status(status):
+    reunioes = Reuniao.objects.all().filter(status=status)
+    #Reuniao.objects.select_related('data_reuniao').all()
     lista_reunioes = []
     for i in reunioes:
         data_i = i.data_reuniao.dia.strftime('%Y-%m-%d')

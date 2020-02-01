@@ -32,6 +32,13 @@ def acao_consolidar(request):
 def acao_cancelar(request):
     if request.method == "POST":
         id = request.POST['id']
+        return redirect("cancelar",id)
+    else:
+        return redirect("calendario")
+@login_required()
+def acao_remover(request):
+    if request.method == "POST":
+        id = request.POST['id']
         return redirect("remover",id)
     else:
         return redirect("calendario")

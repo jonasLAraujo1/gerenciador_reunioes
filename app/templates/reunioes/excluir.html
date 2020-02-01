@@ -21,7 +21,7 @@ $(document).ready(function() {
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title text-center">Tem certeza que quer Excluir a reunião, meu rei</h4>
+                <h4 class="modal-title text-center">Tem certeza que quer {{acao}} essa reunião?</h4>
                 <a href="{% url 'calendario'%}"><button type="button" class="close"aria-label="Close"><span aria-hidden="true">&times;</span>
                 </button></a>
             </div>
@@ -38,7 +38,7 @@ $(document).ready(function() {
                     <nav class="navbar navbar-light bg-light">
                          <form method="post">
                              {%csrf_token%}
-                            <button class="btn btn-outline-danger " type="submit">Excluir</button>
+                            <button class="btn btn-outline-danger " type="submit">{{acao}}</button>
                         </form>
                     </nav>
                 </div>

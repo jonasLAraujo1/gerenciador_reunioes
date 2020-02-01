@@ -60,7 +60,7 @@ class User(AbstractBaseUser):
     )
     nome = models.CharField(max_length=120, null=False, blank=False)
     registro = models.CharField(max_length=11, null=False, blank=False, unique=True,)
-    cpf = models.CharField(max_length=11, null=False, blank=False, unique=True)
+    cpf = models.CharField(max_length=11, null=False, blank=False)
     funcao = models.CharField(max_length=35, null=True, blank=True)
     cargo = models.CharField(max_length=50,null=False, blank=False,)
     lotacao = models.CharField(max_length=35,null=False, blank=False,)
@@ -107,10 +107,10 @@ class Data(models.Model):
 
 class Reuniao(models.Model):
     COR_CHOICES = (
-        ("1", "#5C63DE"),
-        ("2", "#CEC02D"),
-        ("3", "#81CE2D"),
-        ("4", "#2DCEB7"),
+        ("1", "#FFF176"),
+        ("2", "#4CAF50"),
+        ("3", "#78909C"),
+        ("4", "#FF5722"),
     )
     STATUS_CHOICES = (
         ("1", "Agendada"),

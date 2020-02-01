@@ -47,7 +47,8 @@
 		</div>
 		<div class="form-goup">
 			{{ form_usuario.email.erros }}
-			<label>Email </label>
+			<label>Email</label>
+
 			{{ form_usuario.email|addclass:'form-control'}}
 		</div>
 
@@ -60,11 +61,14 @@
 		<div class="form-goup">
 			{{  form_usuario.cpf.erros }}
 			<label>CPF </label>
+			<small class="form-text text-muted" >Digite apenas os números do CPF</small>
 			{{ form_usuario.cpf|addclass:'form-control'}}
+
 		</div>
 		<div class="form-goup">
 			{{ form_usuario.password1.erros }}
 			<label>Senha </label>
+
 			{{ form_usuario.password1|addclass:'form-control'}}
 		</div>
 		<div class="form-goup">
@@ -87,10 +91,10 @@
 		</div>
 		<div class="form-goup">
 			{{  form_usuario.funcao.erros }}
-			<label>Função </label>
+			<label>Função (Opicional)</label>
+			<small class="form-text text-muted" >Informe caso tenha uma função extra, como por exemplo: Cordenador de Curso</small>
 			{{ form_usuario.funcao|addclass:'form-control'}}
 		</div>
-
 		<br>
 		<div class="form-goup">
 			<input type="submit" class="btn btn-sm btn-info" value="Salvar">

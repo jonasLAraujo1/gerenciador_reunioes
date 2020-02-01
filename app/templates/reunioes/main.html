@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {%load static %}
 {% block titulo %}
-	Incio
+	Inicio
 {% endblock titulo %}
 {% block extras %}
 	<link href="{% static 'app/css/fullcalendar.min.css'%}" rel="stylesheet"/>
@@ -97,8 +97,13 @@
 							<form class="form-horizontal" method="POST" action="{%url 'acao_cancelar' %}">
 								{% csrf_token %}
 								<input type="hidden" class="form-control" name="id" id="id">
-
 								<button  class="btn btn-outline-success " type="submit">Cancelar</button>
+							</form>
+
+							<form class="form-horizontal" method="POST" action="{%url 'acao_remover' %}">
+								{% csrf_token %}
+								<input type="hidden" class="form-control" name="id" id="id">
+								<button  class="btn btn-outline-success " type="submit">Excluir</button>
 							</form>
 
 
