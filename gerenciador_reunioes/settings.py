@@ -71,6 +71,7 @@ TEMPLATES = [
     },
 ]
 
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 WSGI_APPLICATION = 'gerenciador_reunioes.wsgi.application'
 
 # Database

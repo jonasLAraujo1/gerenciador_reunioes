@@ -59,7 +59,7 @@ class User(AbstractBaseUser):
         unique=True,
     )
     nome = models.CharField(max_length=120, null=False, blank=False)
-    registro = models.CharField(max_length=11, null=False, blank=False, unique=True,)
+    registro = models.CharField(max_length=11, null=False, blank=False, unique=True)
     cpf = models.CharField(max_length=11, null=False, blank=False)
     funcao = models.CharField(max_length=35, null=True, blank=True)
     cargo = models.CharField(max_length=50,null=False, blank=False,)
@@ -92,7 +92,7 @@ class User(AbstractBaseUser):
         return self.is_admin
 
 class Tipo(models.Model):
-    titulo = models.CharField(max_length=120, null=False, blank=False)
+    titulo = models.CharField(max_length=120, null=False, blank=False, unique=True)
 
     def __str__(self):
         return self.titulo

@@ -4,22 +4,30 @@
     <head>
 
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>
         {% block titulo %}
         {% endblock titulo %}
         </title>
-
         <link rel="stylesheet" href="{% static 'app/css/bootstrap.css'%}" />
         <script src="{% static 'app/js/jquery.min.js'%}"></script>
         <script src="{% static 'app/js/bootstrap.min.js'%}"></script>
-
         {% block extras %}
+        <style>
+            html, body {
+    height: 100%;
+}
+.container-fluid {
+ min-height: 85%;
+ height:auto !important; /* cross-browser */
+ height: 85%; /* cross-browser */
+}
+</style>
         {% endblock extras %}
-
     </head>
 
-    <body >
-        <header class="navbar navbar-dark flex-column flex-md-row " style='background-color: #28a745'>
+    <body>
+        <header class="navbar sticky-top navbar-dark flex-column flex-md-row" style='background-color: #28a745; padding-top'>
             <div class="navbar" >
                 <ul class="nav justify-content-center">
                     <li class="nav-item">
@@ -34,8 +42,9 @@
 
             </div>
         </header>
-    <div class="container-fluid" style=" background-color: #81C784;">
-        <div class="container"  style="background-color: #fff">
+
+    <div class="container-fluid " style=" background-color: #81C784;">
+        <div class="container-xl"  style="background-color: #fff">
             {% block conteudo %}
             {% endblock conteudo %}
         </div>

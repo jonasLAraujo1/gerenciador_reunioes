@@ -9,98 +9,79 @@
 {% block conteudo %}
 	<div class="card" >
 		<div class="card-header">
-
-		 <h5 class="card-title"> Cadastrar Servidor</h5>
-        <p class="card-text">Insira Seus Dados</p>
-	</div>
+			<h5 class="card-title"> Cadastrar Servidor</h5>
+			<p class="card-text">Insira Seus Dados</p>
+		</div>
 		<div class="card-body">
 			{% if sucesso %}
-				<script type="text/javascript">
-				$(document).ready(function() {
-				$('#cad_tipo').modal('show');
-				})
-				</script>
+			<script type="text/javascript">
+			$(document).ready(function() {
+			$('#cad_tipo').modal('show');
+			})
+		    </script>
 			{% endif %}
-	<form  method="post">
-
-		{% csrf_token %}
-<!--		{% for message in mensagem%}-->
-
-<!--		<div class="alert alert-danger">-->
-<!--			{{message}}-->
-<!--		</div>-->
-
-<!--		{%endfor%}-->
-
-{%if mensagem%}
-		<div class="alert alert-danger">
-		{% for key, value in mensagem.items%}
-		{{ value }}
-
-		{%endfor%}
-		</div>
-{%endif%}
-		<div class="form-goup">
-			{{ form_usuario.nome.erros }}
-			<label>Nome Completo </label>
-			{{ form_usuario.nome|addclass:'form-control'}}
-		</div>
-		<div class="form-goup">
-			{{ form_usuario.email.erros }}
-			<label>Email</label>
-
-			{{ form_usuario.email|addclass:'form-control'}}
-		</div>
-
-		<div class="form-goup">
-			{{  form_usuario.registro.erros }}
-			<label>Siape </label>
-			{{ form_usuario.registro|addclass:'form-control'}}
-		</div>
-
-		<div class="form-goup">
-			{{  form_usuario.cpf.erros }}
-			<label>CPF </label>
-			<small class="form-text text-muted" >Digite apenas os números do CPF</small>
-			{{ form_usuario.cpf|addclass:'form-control'}}
-
-		</div>
-		<div class="form-goup">
-			{{ form_usuario.password1.erros }}
-			<label>Senha </label>
-
-			{{ form_usuario.password1|addclass:'form-control'}}
-		</div>
-		<div class="form-goup">
-			{{ form_usuario.password2.erros }}
-			<label>Confirmação de senha </label>
-			{{ form_usuario.password2|addclass:'form-control'}}
-		</div>
-
-
-		<div class="form-goup">
-			{{  form_usuario.cargo.erros }}
-			<label>Cargo </label>
-			{{ form_usuario.cargo|addclass:'form-control'}}
-		</div>
-
-		<div class="form-goup">
-			{{  form_usuario.lotacao.erros }}
-			<label>Lotação</label>
-			{{ form_usuario.lotacao|addclass:'form-control'}}
-		</div>
-		<div class="form-goup">
-			{{  form_usuario.funcao.erros }}
-			<label>Função (Opicional)</label>
-			<small class="form-text text-muted" >Informe caso tenha uma função extra, como por exemplo: Cordenador de Curso</small>
-			{{ form_usuario.funcao|addclass:'form-control'}}
-		</div>
-		<br>
-		<div class="form-goup">
-			<input type="submit" class="btn btn-sm btn-info" value="Salvar">
-		</div>
-	</form>
+			<form  method="post">
+				{% csrf_token %}
+				{%if mensagem%}
+				<div class="alert alert-danger">
+					{% for key, value in mensagem.items%}
+					{{ value }}
+					{%endfor%}
+				</div>
+				{%endif%}
+				<div class="form-goup">
+					{{ form_usuario.nome.erros }}
+					<label>Nome Completo </label>
+					{{ form_usuario.nome|addclass:'form-control'}}
+				</div>
+				<div class="form-goup">
+					{{ form_usuario.email.erros }}
+					<label>Email</label>
+					{{ form_usuario.email|addclass:'form-control'}}
+				</div>
+				<div class="form-goup">
+					{{  form_usuario.registro.erros }}
+					<label>Siape </label>
+					{{ form_usuario.registro|addclass:'form-control'}}
+				</div>
+				<div class="form-goup">
+					{{  form_usuario.cpf.erros }}
+					<label>CPF </label>
+					<small class="form-text text-muted" >Digite apenas os números do CPF</small>
+					{{ form_usuario.cpf|addclass:'form-control'}}
+				</div>
+				<div class="form-goup">
+					{{ form_usuario.password1.erros }}
+					<label>Senha </label>
+					{{ form_usuario.password1|addclass:'form-control'}}
+				</div>
+				<div class="form-goup">
+					{{ form_usuario.password2.erros }}
+					<label>Confirmação de senha </label>
+					{{ form_usuario.password2|addclass:'form-control'}}
+				</div>
+				<div class="form-goup">
+					{{  form_usuario.cargo.erros }}
+					<label>Cargo </label>
+					{{ form_usuario.cargo|addclass:'form-control'}}
+				</div>
+				<div class="form-goup">
+					{{  form_usuario.lotacao.erros }}
+					<label>Lotação</label>
+					{{ form_usuario.lotacao|addclass:'form-control'}}
+				</div>
+				<div class="form-goup">
+					{{  form_usuario.funcao.erros }}
+					<label>Função (Opicional)</label>
+					<small class="form-text text-muted" >Informe caso tenha uma função extra, como por exemplo: Cordenador de Curso</small>
+					{{ form_usuario.funcao|addclass:'form-control'}}
+				</div>
+				<br>
+				<div class="form-goup">
+					<input type="submit" class="btn btn-sm btn-info" value="Salvar">
+				</div>
+			</form>
 		</div>
 	</div>
-
+<br>
 	{% endblock conteudo %}

@@ -7,38 +7,35 @@
 	Logar
 {% endblock nome_pagina %}
 {% block conteudo %}
-	<div class="card" >
-		<div class="card-header">
-
-		 <h5 class="card-title"> Logar no Sistema</h5>
-        <p class="card-text">Entre com suas credenciais</p>
+<div class="card" >
+	<div class="card-header">
+		<h5 class="card-title"> Logar no Sistema</h5>
+		<p class="card-text">Entre com suas credenciais</p>
 	</div>
-		<div class="card-body">
-			<form  method="post">
-				{% csrf_token %}
-		{% for message in messages%}
-		<div class="alert alert-danger">
-			{{message}}
-		</div>
-		{%endfor%}
-		<div class="form-goup">
-			{{ form_usuario.username.erros }}
-			<label>Email</label>
-			{{ form_login.username|addclass:'form-control'}}
-		</div>
-		<div class="form-goup">
-			{{ form_usuario.password1.erros }}
-			<label>Senha </label>
-			{{ form_login.password|addclass:'form-control'}}
-		</div>
-		<br>
-		<div class="form-goup">
-			<input type="submit" class="btn btn-sm btn-info" value="Logar">
-		</div>
+	<div class="card-body">
+		<form  method="post">
+			{% csrf_token %}
+			{% for message in messages%}
+			<div class="alert alert-danger">
+				{{message}}
+			</div>
+			{%endfor%}
+			<div class="form-goup">
+				{{ form_usuario.username.erros }}
+				<label>Email</label>
+				{{ form_login.username|addclass:'form-control'}}
+			</div>
+			<div class="form-goup">
+				{{ form_usuario.password1.erros }}
+				<label>Senha </label>
+				{{ form_login.password|addclass:'form-control'}}
+			</div>
+
+			<div class="form-goup" style="margin-top:20px;">
+				<input type="submit" class="btn btn-sm btn-info" value="Logar">
+			</div>
 		</form>
-</div>
 	</div>
-
-
-
-	{% endblock conteudo %}
+</div>
+<br>
+		{% endblock conteudo %}

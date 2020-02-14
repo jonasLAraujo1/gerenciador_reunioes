@@ -29,6 +29,13 @@ $(document).ready(function() {
                 <dl class="dl-horizontal">
                     <form class="form-horizontal" method="POST">
                     {% csrf_token %}
+                        {%if mensagem%}
+			<div class="alert alert-danger">
+				{% for key, value in mensagem.items%}
+				{{ value }}
+				{%endfor%}
+			</div>
+			{%endif%}
                     {{ form_tipo.titulo.erros }}
                     <dt>Tipo da Reunião</dt>
                     {{ form_tipo.titulo|addclass:'form-control'}}

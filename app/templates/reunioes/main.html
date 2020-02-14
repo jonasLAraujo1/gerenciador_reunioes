@@ -5,25 +5,23 @@
 {% endblock titulo %}
 {% block extras %}
 	<link href="{% static 'app/css/fullcalendar.min.css'%}" rel="stylesheet"/>
-	<link href="{% static 'app/css/fullcalendar.print.min.css'%}" media="print" rel="stylesheet"/>
-	<script src="{% static 'app/js/moment.min.js'%}">
-	</script>
-	<script src="{% static 'app/js/fullcalendar.min.js'%}">
-	</script>
-	<script src="{% static 'app/locale/pt-br.js'%}">
-	</script>
-	<script>
+	<script src="{% static 'app/js/moment.min.js'%}"></script>
+	<script src="{% static 'app/js/fullcalendar.min.js'%}"></script>
+	<script src="{% static 'app/locale/pt-br.js'%}"></script>
+<script>
 	$(document).ready(function() {
 				$('#calendar').fullCalendar({
 					header: {
-						left: 'prev,next today',
+						left: 'prev, today ,next',
 						center: 'title',
 						right: 'month,agendaWeek,agendaDay,listMonth'
 					},
+
+
 					defaultDate: Date(),
 					navLinks: true, // can click day/week names to navigate views
 					editable: false,
-					eventLimit: true, // allow "more" link when too many events
+					eventLimit: false, // allow "more" link when too many events
 					eventClick: function(event) {
 						$('#visualizar #id').text(event.id);
 		$('#visualizar #id').val(event.id);
@@ -52,9 +50,8 @@
 	{{ notificacao }}
 {% endblock notificacao %}
 {% block conteudo %}
-
-	<div id="calendar" style="text-transform: capitalize;">
-		<div class="modal fade" id="visualizar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" data-backdrop="static">
+<div id="calendar" style="text-transform: capitalize;">
+	<div class="modal fade" id="visualizar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" data-backdrop="static">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -79,19 +76,16 @@
 							<form class="form-horizontal" method="POST" action="{%url 'acao_marcar' %}">
 								{% csrf_token %}
 								<input type="hidden" class="form-control" name="id" id="id">
-
 								<button  class="btn btn-outline-success " type="submit">Confirmar</button>
 							</form>
 							<form class="form-horizontal" method="POST" action="{%url 'acao_marcar' %}">
 								{% csrf_token %}
 								<input type="hidden" class="form-control" name="id" id="id">
-
 								<button  class="btn btn-outline-success " type="submit">Alterar</button>
 							</form>
 							<form class="form-horizontal" method="POST" action="{%url 'acao_consolidar' %}">
 								{% csrf_token %}
 								<input type="hidden" class="form-control" name="id" id="id">
-
 								<button  class="btn btn-outline-success " type="submit">Consolidar</button>
 							</form>
 							<form class="form-horizontal" method="POST" action="{%url 'acao_cancelar' %}">
@@ -99,29 +93,23 @@
 								<input type="hidden" class="form-control" name="id" id="id">
 								<button  class="btn btn-outline-success " type="submit">Cancelar</button>
 							</form>
-
 							<form class="form-horizontal" method="POST" action="{%url 'acao_remover' %}">
 								{% csrf_token %}
 								<input type="hidden" class="form-control" name="id" id="id">
 								<button  class="btn btn-outline-success " type="submit">Excluir</button>
 							</form>
-
-
-
 						</nav>
 						<nav class="navbar navbar-light bg-light" >
 							<form class="form-horizontal" method="POST"  action="{%url 'acao_ata' %}"> <!-- target=_BLANK -->
-                                {% csrf_token %}
-							<input type="hidden" class="form-control" name="id" id="id">
-							<button  class="btn  btn-outline-success" type="submit">Gerar ATA</button>
-						</form>
-
-
-
-					</nav>
+								{% csrf_token %}
+								<input type="hidden" class="form-control" name="id" id="id">
+								<button  class="btn  btn-outline-success" type="submit">Gerar ATA</button>
+							</form>
+						</nav>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	</div>
+</div>
 {% endblock conteudo %}

@@ -62,6 +62,7 @@ def marcar_reuniao(request, id):
     form_reuniao = FormReuniao(request.POST or None, instance=reuniao_bd)
     form_data = FormData(request.POST or None, instance=data_bd)
     titulo = "Marcar"
+    mensagem = ""
     notificacao = 0
     if form_data.is_valid():
         dia = form_data.cleaned_data["dia"]
@@ -77,16 +78,19 @@ def marcar_reuniao(request, id):
             deliberacoes = form_reuniao.cleaned_data["deliberacoes"]
             observacoes = form_reuniao.cleaned_data["observacoes"]
             status = "2"
-            cor="2"
-
+            cor = "2"
             data_services.alterar_data(data_bd, nova_data)
             nova_reuniao = reunioes.Reuniao(tipo_reuniao=tipo, data=data_bd, pauta=pauta, local=local,
                                             semestre=semestre,participantes=participantes, observacoes=observacoes, deliberacoes=deliberacoes,
                                             status=status,cor=cor)
             reuniao_service.alterar_reuniao(reuniao_bd, nova_reuniao)
             return redirect('calendario')
+        else:
+            mensagem = form_reuniao.errors
+    else:
+        mensagem = form_data.errors
     return render(request, 'reunioes/form_reuniao.html',
-                  {"titulo": titulo, "notificacao": notificacao, "form_reuniao": form_reuniao,
+                  {"titulo": titulo, "notificacao": notificacao,"mensagem":mensagem ,"form_reuniao": form_reuniao,
                    "form_data": form_data})
 
 
@@ -129,18 +133,23 @@ def consolidar_reuniao(request, id):
 def agendar_tipo(request):
     titulo = "Novo Tipo"
     notificacao = 0
+    mensagem = ""
+
     if request.method == "POST":
         form_tipo = FormTipo(request.POST)
         if form_tipo.is_valid():
             titulo = form_tipo.cleaned_data["titulo"]
-
             novo_tipo = reunioes.Tipo(titulo=titulo)
             reuniao_service.salvar_tipo(novo_tipo)
             return redirect('agendar_reuniao')
+        else:
+            mensagem = form_tipo.errors
+
+
     else:
         form_tipo = FormTipo()
     return render(request, 'reunioes/criar_tipo.html',
-                  {"titulo": titulo, "notificacao": notificacao, "form_tipo": form_tipo})
+                  {"titulo": titulo, "notificacao": notificacao,"mensagem":mensagem, "form_tipo": form_tipo})
 
 
 @login_required()
@@ -158,14 +167,6 @@ def resultado_busca(request):
         semestre = request.POST['busca']
         resultados = reuniao_service.retornar_por_semestre(semestre)
     return render(request, 'reunioes/busca.html', { "notificacao": notificacao,"resultados":resultados,"semestre":semestre})
-
-def novo_tipo(request):
-    form = FormTipo(request.POST)
-    if form.is_valid():
-        form.save(commit=True)
-        return redirect('#')
-    else:
-        return bad_request(request, None, 'ops_400.html')
 
 
 @login_required()
@@ -193,7 +194,6 @@ def ata(request, id):
     participantes=reuniao.participantes.all()
 
     context = {'reuniao': reuniao,'usuario':usuario,'participantes':participantes}
-    # template = 'reunioes/molde001.htm'
     return render_to_pdf_response(request,template,context)
 
 
