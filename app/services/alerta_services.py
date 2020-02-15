@@ -1,11 +1,20 @@
 from ..models import Alerta
 
 def criar_alerta(alerta):
-    Alerta.objects.create(titulo=alerta.titulo,observacoes=alerta.observacoes,status=alerta.status)
+    Alerta.objects.create(titulo=alerta.titulo,observacoes=alerta.observacoes,usario=alerta.usuario,status=alerta.status)
 
-def listar_todos():
-    alertas=Alerta.objects.all()
-    return alertas
+def contar(usuario):
+    alertas=Alerta.objects.filter(usuario=usuario,status="1").all()
+    contagem=0
+    for i in alertas:
+        contagem+=1
+
+    return contagem
+
+def listar_todos(usuario):
+    alertas=Alerta.objects.filter(usuario=usuario).all()
+    return  alertas
+
 
 def atualizar_alerta(alerta_bd,alerta_novo):
    alerta_bd.titulo = alerta_novo.titulo

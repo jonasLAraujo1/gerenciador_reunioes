@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load meus_filtros %}
+{% block titulo %}
+	{{ titulo }}
+{% endblock titulo %}
+{% block nome_pagina %}
+	Resultados da Busca
+{% endblock nome_pagina %}
+
+{% block conteudo %}
+
+{%for alerta in alertas%}
+<br>
+<div class="list-group">
+  <a href="#" class="list-group-item list-group-item-action active">
+   {{alerta.titulo}}
+  </a>
+  <a href="#" class="list-group-item list-group-item-action">{{alerta.informacoes}}</a>
+</div>
+{%endfor%}
+{% endblock conteudo %}

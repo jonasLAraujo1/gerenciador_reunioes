@@ -1,12 +1,18 @@
-from ..models import User
-from ..models import Reuniao, Tipo
+from ..models import User,Reuniao, Tipo,Alerta
+from .alerta_services import *
 
 def agendar_reuniao(reuniao):
     reuniao_bd=Reuniao.objects.create(tipo_reuniao=reuniao.tipo_reuniao,data_reuniao=reuniao.data,pauta=reuniao.pauta,
                            local=reuniao.local,semestre=reuniao.semestre,observacoes=reuniao.observacoes,deliberacoes=reuniao.deliberacoes,status=reuniao.status)
     reuniao_bd.save()
+    titulo="Reunião de "+str(reuniao.tipo_reuniao)
+    informacoes = "Uma nova Reunião com a Pauta: " + str(reuniao.pauta) + \
+                  " Foi Agendada Para o Dia: " + str(reuniao.data.dia.strftime('%d/%m/%Y'))+\
+                  " Com inicio as: "+str(reuniao.data.inicio.strftime('%H:%M'))
+    # print(titulo,informacoes)
     for i in reuniao.participantes:
         usuario= User.objects.get(id=i.id)
+        Alerta.objects.create(titulo=titulo,informacoes=informacoes,usuario=usuario,status="1")
         reuniao_bd.participantes.add(usuario)
 
 def alterar_reuniao(reuniao_db,reuniao_nova):

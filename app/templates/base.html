@@ -36,8 +36,6 @@
         {% endblock extras %}
     </head>
     <body>
-
-
     <header class="navbar sticky-top navbar-dark " style='background-color: #28a745;'>
         <div class="navbar" >
             <ul class="nav nav-pills nav-justified">
@@ -66,11 +64,13 @@
         <div class="navbar" >
             <ul class="nav nav-pills nav-justified">
                 <li class="nav-item">
-                    <a class="navbar-brand" href="./formularios/listaNotificacoes.php"><img src="{% static 'app/img/bell.svg'%}"  style="float:left;">
+                    <a class="navbar-brand" href="{% url 'listar' %}"><img src="{% static 'app/img/bell.svg'%}"  style="float:left;">
                         {% if notificacao%}
                         <span class="badge badge-sm badge-danger" style="margin: 0px -3px;">
-                            {% block notificacao %}
-                            {% endblock notificacao %}
+                            {%if notificacao %}
+                            {{ notificacao }}
+
+                            {%endif%}
                         </span>
                         {%endif%}
                     </a>

@@ -7,7 +7,7 @@ from django.template.response import TemplateResponse
 from .views.acoes_views import *
 from .views.reunioes_views import *
 from .views.usuario_views import *
-
+from  .views import alerta_views
 
 if settings.DEBUG:
     urls_reuniao = [
@@ -22,6 +22,7 @@ if settings.DEBUG:
         path('consolidar/', acao_consolidar, name="acao_consolidar"),
         #path('busca/', acao_busca, name="acao_busca"),
         path('busca/', resultado_busca, name="resultado_busca"),
+        path('notificacoes/', alerta_views.listar, name="listar"),
         path('gerar/', acao_ata, name="acao_ata"),
         path('excluir/', acao_remover, name="acao_remover"),
         path('cancelar/', acao_cancelar, name="acao_cancelar"),

@@ -4,9 +4,7 @@ from django.shortcuts import render, redirect
 from django.views.defaults import bad_request
 from easy_pdf.rendering import render_to_pdf_response
 
-
-
-from ..entidades import reunioes, alertas
+from ..entidades import reunioes
 from ..forms import *
 from ..services import reuniao_service, data_services, alerta_services
 
@@ -14,7 +12,7 @@ from ..services import reuniao_service, data_services, alerta_services
 @login_required()
 def agendar_reuniao(request):
     titulo = "Agendar"
-    notificacao = 0
+    notificacao = alerta_services.contar(request.user)
     if request.method == "POST":
         form_data = FormData(request.POST)
         form_reuniao = FormAgendaReuniao(request.POST)
@@ -39,10 +37,6 @@ def agendar_reuniao(request):
                                                 semestre=semestre,participantes=participantes, observacoes=observacoes, deliberacoes=deliberacoes,
                                                 cor="1",status=status)
                 reuniao_service.agendar_reuniao(nova_reuniao)
-                observacoes = "Uma nova Reunião com a Pauta: " + str(pauta) + \
-                              " Foi Agendada Para o Dia: " + str(dia) + " com  previsão de Inicioa as " + str(inicio)
-                alerta_novo = alertas.Alerta(titulo="Reunião Agendada", observacoes=observacoes, status="1")
-                alerta_services.criar_alerta(alerta_novo)
 
                 return redirect('calendario')
     else:
@@ -62,8 +56,9 @@ def marcar_reuniao(request, id):
     form_reuniao = FormReuniao(request.POST or None, instance=reuniao_bd)
     form_data = FormData(request.POST or None, instance=data_bd)
     titulo = "Marcar"
-    mensagem = ""
-    notificacao = 0
+    mensagem =""
+    notificacao = alerta_services.contar(request.user)
+    notificacao = alerta_services.listar_todos(request.user)
     if form_data.is_valid():
         dia = form_data.cleaned_data["dia"]
         inicio = form_data.cleaned_data["inicio"]
@@ -98,11 +93,11 @@ def marcar_reuniao(request, id):
 def consolidar_reuniao(request, id):
     reuniao_bd = reuniao_service.retornar_reuniao_id(id)
     data_bd = data_services.retornar_data_id(id)
-
+    notificacao = alerta_services.contar(request.user)
     form_reuniao = FormReuniao(request.POST or None, instance=reuniao_bd)
     form_data = FormData(request.POST or None, instance=data_bd)
     titulo = "Consolidar"
-    notificacao = 0
+    
     if form_data.is_valid():
         dia = form_data.cleaned_data["dia"]
         inicio = form_data.cleaned_data["inicio"]
@@ -132,7 +127,7 @@ def consolidar_reuniao(request, id):
 @login_required()
 def agendar_tipo(request):
     titulo = "Novo Tipo"
-    notificacao = 0
+    notificacao = alerta_services.contar(request.user)
     mensagem = ""
 
     if request.method == "POST":
@@ -156,13 +151,13 @@ def agendar_tipo(request):
 def calendario(request):
     if request.method == "POST":
         pass
-    notificacao = ""
+    notificacao = alerta_services.contar(request.user)
     reunioes = reuniao_service.retornar_tudo()
     return render(request, 'reunioes/main.html', {"reunioes": reunioes, "notificacao": notificacao})
 
 @login_required()
 def resultado_busca(request):
-    notificacao = ""
+    notificacao = alerta_services.contar(request.user)
     if request.method == "POST":
         semestre = request.POST['busca']
         resultados = reuniao_service.retornar_por_semestre(semestre)
