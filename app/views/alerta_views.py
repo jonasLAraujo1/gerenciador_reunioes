@@ -19,7 +19,20 @@ def resultado_busca(request):
 def listar(request):
     notificacao = alerta_services.contar(request.user)
     alertas=alerta_services.listar_todos(request.user)
+    contador=0
     if request.method == "POST":
-        semestre = request.POST['busca']
-        resultados = reuniao_service.retornar_por_semestre(semestre)
+        try:
+            id = request.POST['id']
+            alerta_services.apagar_alerta(id)
+            print("id")
+        # if request.POST['id'] ==None:
+        except:
+            id = request.POST['status']
+            alerta_services.visualizar_alerta(id)
+            print("Status")
+
+
+
+        return redirect("listar")
+
     return render(request, 'alertas/listagem.html', {"notificacao": notificacao,"alertas":alertas})

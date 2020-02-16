@@ -16,7 +16,17 @@ def listar_todos(usuario):
     return  alertas
 
 
+def apagar_alerta(id):
+    alerta_bd=Alerta.objects.get(id=id)
+    alerta_bd.delete()
+
 def atualizar_alerta(alerta_bd,alerta_novo):
    alerta_bd.titulo = alerta_novo.titulo
    alerta_bd.observacoes = alerta_novo.observacoes
    alerta_bd.status = '2'
+
+
+def visualizar_alerta(id):
+    alerta_bd = Alerta.objects.get(id=id)
+    alerta_bd.status = '2'
+    alerta_bd.save(force_update=True)
