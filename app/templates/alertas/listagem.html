@@ -9,23 +9,58 @@
 
 {% block conteudo %}
 
+
 {%for alerta in alertas%}
+
+	{%if alerta.status == "1"%}
 <br>
-<div class="list-group">
-  <a href="#" class="list-group-item list-group-item-action {%if alerta.status != 1 %} active {%endif%}">
-   {{alerta.titulo}}
-  </a>
-	<form class="form-horizontal" method="POST" action="{%url 'listar' %}">
-		{% csrf_token %}
-		<input type="hidden" class="form-control" name="status"  value={{alerta.id}}>
-		<button  class="btn btn-outline list-group-item list-group-item-action" type="submit"> {{alerta.informacoes}} </button>
-	</form>
-	<form class="form-horizontal" method="POST" action="{%url 'listar' %}">
+<ul class="list-group">
+	 <li class="list-group-item d-flex  justify-content-between align-items-center  active">
+		<h6> {{alerta.titulo}}</h6>
+	 </li>
+	<li class="list-group-item d-flex justify-content-between align-items-center">
+		 <p>
+			 {{alerta.informacoes}}
+		 </p>
+    <form class="form-horizontal" method="POST" action="{%url 'listar' %}">
+			{% csrf_token %}
+			<input type="hidden" class="form-control" name="status"  value={{alerta.id}}>
+			<button  class="btn btn-sm btn-outline list-group-item list-group-item-action" type="submit">Visualizada  </button>
+		</form>
+
+    <span class="badge "><form class="form-horizontal" method="POST" action="{%url 'listar' %}">
 		{% csrf_token %}
 		<input type="hidden" class="form-control" name="id"  value={{alerta.id}}>
 		<button  class="btn btn-sm btn-outline-danger list-group-item" type="submit"> excluir </button>
-	</form>
-</div>
+	</form></span>
+  </li>
+</ul>
+	{%endif%}
+
+
+{%endfor%}
+
+
+{%for alerta in alertas%}
+	{%if alerta.status == "2"%}
+<br>
+<ul class="list-group">
+
+	<li class="list-group-item d-flex list-group-item-dark justify-content-between align-items-center">
+		<h6> {{alerta.titulo}}</h6>
+	 </li>
+	<li class="list-group-item d-flex list-group-item-secondary justify-content-between align-items-center">
+		 <p>
+			 {{alerta.informacoes}}
+		 </p>
+    <span class="badge "><form class="form-horizontal" method="POST" action="{%url 'listar' %}">
+		{% csrf_token %}
+		<input type="hidden" class="form-control" name="id"  value={{alerta.id}}>
+		<button  class="btn btn-sm btn-outline-danger list-group-item" type="submit"> excluir </button>
+	</form></span>
+  </li>
+	{%endif%}
+</ul>
 {%endfor%}
 <br>
 {% endblock conteudo %}

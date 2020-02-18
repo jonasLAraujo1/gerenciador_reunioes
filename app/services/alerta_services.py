@@ -12,8 +12,8 @@ def contar(usuario):
     return contagem
 
 def listar_todos(usuario):
-    alertas=Alerta.objects.filter(usuario=usuario).all()
-    return  alertas
+    alertas = Alerta.objects.filter(usuario=usuario).all()
+    return alertas
 
 
 def apagar_alerta(id):
