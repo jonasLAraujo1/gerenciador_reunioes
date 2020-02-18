@@ -17,6 +17,7 @@ def resultado_busca(request):
     return render(request, 'reunioes/busca.html', { "notificacao": notificacao,"resultados":resultados,"semestre":semestre})
 @login_required()
 def listar(request):
+
     notificacao = alerta_services.contar(request.user)
     alertas=alerta_services.listar_todos(request.user)
     contador=0
@@ -34,5 +35,4 @@ def listar(request):
 
 
         return redirect("listar")
-
     return render(request, 'alertas/listagem.html', {"notificacao": notificacao,"alertas":alertas})

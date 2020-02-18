@@ -58,7 +58,7 @@ def marcar_reuniao(request, id):
     titulo = "Marcar"
     mensagem =""
     notificacao = alerta_services.contar(request.user)
-    notificacao = alerta_services.listar_todos(request.user)
+
     if form_data.is_valid():
         dia = form_data.cleaned_data["dia"]
         inicio = form_data.cleaned_data["inicio"]
@@ -125,6 +125,41 @@ def consolidar_reuniao(request, id):
 
 
 @login_required()
+def alterar_reuniao(request, id):
+    reuniao_bd = reuniao_service.retornar_reuniao_id(id)
+    data_bd = data_services.retornar_data_id(id)
+    notificacao = alerta_services.contar(request.user)
+    form_reuniao = FormReuniao(request.POST or None, instance=reuniao_bd)
+    form_data = FormData(request.POST or None, instance=data_bd)
+    titulo = "Alterar"
+
+    if form_data.is_valid():
+        dia = form_data.cleaned_data["dia"]
+        inicio = form_data.cleaned_data["inicio"]
+        fim = form_data.cleaned_data["fim"]
+        nova_data = reunioes.Data(dia=dia, inicio=inicio, fim=fim)
+        if form_reuniao.is_valid():
+            tipo = form_reuniao.cleaned_data["tipo_reuniao"]
+            pauta = form_reuniao.cleaned_data["pauta"]
+            local = form_reuniao.cleaned_data["local"]
+            semestre = form_reuniao.cleaned_data["semestre"]
+            participantes = form_reuniao.cleaned_data["participantes"]
+            deliberacoes = form_reuniao.cleaned_data["deliberacoes"]
+            observacoes = form_reuniao.cleaned_data["observacoes"]
+            status = "3"
+            cor = "3"
+            data_services.alterar_data(data_bd, nova_data)
+            nova_reuniao = reunioes.Reuniao(tipo_reuniao=tipo, data=data_bd, pauta=pauta, local=local,
+                                            semestre=semestre, participantes=participantes,
+                                            observacoes=observacoes, deliberacoes=deliberacoes, cor=cor, status=status)
+            reuniao_service.alterar_exceto(reuniao_bd, nova_reuniao)
+            return redirect('calendario')
+    return render(request, 'reunioes/form_reuniao.html',
+                  {"titulo": titulo, "notificacao": notificacao, "form_reuniao": form_reuniao,
+                   "form_data": form_data})
+
+
+@login_required()
 def agendar_tipo(request):
     titulo = "Novo Tipo"
     notificacao = alerta_services.contar(request.user)
@@ -150,7 +185,7 @@ def agendar_tipo(request):
 @login_required()
 def calendario(request):
     usuario = request.user
-    print(usuario)
+
     notificacao = alerta_services.contar(request.user)
     reunioes = reuniao_service.retornar_tudo()
     return render(request, 'reunioes/main.html', {"reunioes": reunioes, "notificacao": notificacao})
@@ -167,6 +202,7 @@ def resultado_busca(request):
 
 @login_required()
 def ver_info(request,id):
+
     notificacao = alerta_services.contar(request.user)
     reuniao = reuniao_service.retornar_reuniao_id(id)
     return render(request, 'reunioes/info_reuniao.html', { "notificacao": notificacao,"reuniao":reuniao})

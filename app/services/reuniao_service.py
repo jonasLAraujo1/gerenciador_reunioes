@@ -15,24 +15,36 @@ def agendar_reuniao(reuniao):
         Alerta.objects.create(titulo=titulo,informacoes=informacoes,usuario=usuario,status="1")
         reuniao_bd.participantes.add(usuario)
 
-def alterar_reuniao(reuniao_db,reuniao_nova):
-    reuniao_db.tipo_reuniao=reuniao_nova.tipo_reuniao
-    reuniao_db.data=reuniao_nova.data
-    reuniao_db.pauta=reuniao_nova.pauta
-    reuniao_db.local = reuniao_nova.local
-    reuniao_db.semestre = reuniao_nova.semestre
-    reuniao_db.observacoes = reuniao_nova.observacoes
-    reuniao_db.deliberacoes = reuniao_nova.deliberacoes
-    reuniao_db.cor = reuniao_nova.cor
-    reuniao_db.participantes.set(reuniao_nova.participantes)
-    reuniao_db.status = reuniao_nova.status
-    reuniao_db.save(force_update=True)
-def alt(reuniao_db):
-    reuniao_db.cor = "4"
+def alterar_reuniao(reuniao_bd,reuniao_nova):
+    reuniao_bd.tipo_reuniao=reuniao_nova.tipo_reuniao
+    reuniao_bd.data=reuniao_nova.data
+    reuniao_bd.pauta=reuniao_nova.pauta
+    reuniao_bd.local = reuniao_nova.local
+    reuniao_bd.semestre = reuniao_nova.semestre
+    reuniao_bd.observacoes = reuniao_nova.observacoes
+    reuniao_bd.deliberacoes = reuniao_nova.deliberacoes
+    reuniao_bd.cor = reuniao_nova.cor
+    reuniao_bd.participantes.set(reuniao_nova.participantes)
+    reuniao_bd.status = reuniao_nova.status
+    reuniao_bd.save(force_update=True)
 
-    reuniao_db.status = "4"
-    reuniao_db.save(force_update=True)
+def alterar_exceto(reuniao_bd,reuniao_nova):
+    reuniao_bd.tipo_reuniao = reuniao_nova.tipo_reuniao
+    reuniao_bd.data = reuniao_nova.data
+    reuniao_bd.pauta = reuniao_nova.pauta
+    reuniao_bd.local = reuniao_nova.local
+    reuniao_bd.semestre = reuniao_nova.semestre
+    reuniao_bd.observacoes = reuniao_nova.observacoes
+    reuniao_bd.deliberacoes = reuniao_nova.deliberacoes
+    reuniao_bd.participantes.set(reuniao_nova.participantes)
+    reuniao_bd.status = reuniao_nova.status
+    reuniao_bd.save(force_update=True)
+    reuniao_bd.save(force_update=True)
 
+
+def cancelar_reuniao(reuniao_bd):
+    reuniao_bd.cor = "4"
+    reuniao_bd.status = "4"
 
 def apagar_reuniao(reuniao_bd):
     reuniao_bd.delete()
@@ -63,6 +75,8 @@ def retornar_tudo():
             'status': i.get_status_display,
         })
     return lista_reunioes
+
+
 def retornar_status(status):
     reunioes = Reuniao.objects.all().filter(status=status)
     #Reuniao.objects.select_related('data_reuniao').all()

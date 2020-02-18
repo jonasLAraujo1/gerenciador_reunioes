@@ -17,9 +17,10 @@ def acao_marcar(request):
 def acao_aletrar(request):
     if request.method == "POST":
         id = request.POST['id']
-        return redirect("marcar_reuniao",id)
+        return redirect("alterar_reuniao",id)
     else:
         return redirect("calendario")
+
 
 @login_required()
 def acao_consolidar(request):
@@ -28,6 +29,8 @@ def acao_consolidar(request):
         return redirect("consolidar_reuniao",id)
     else:
         return redirect("calendario")
+
+
 @login_required()
 def acao_cancelar(request):
     if request.method == "POST":
@@ -35,6 +38,8 @@ def acao_cancelar(request):
         return redirect("cancelar",id)
     else:
         return redirect("calendario")
+
+
 @login_required()
 def acao_remover(request):
     if request.method == "POST":
@@ -42,6 +47,8 @@ def acao_remover(request):
         return redirect("remover",id)
     else:
         return redirect("calendario")
+
+
 @login_required()
 def acao_ata(request):
     if request.method == "POST":
@@ -49,6 +56,7 @@ def acao_ata(request):
         return redirect("ata",id)
     else:
         return redirect("calendario")
+
 
 @login_required()
 def acao_busca(request):

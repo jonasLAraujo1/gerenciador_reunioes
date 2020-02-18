@@ -13,6 +13,7 @@ if settings.DEBUG:
     urls_acoes = [
         path('marcar/', acao_marcar, name="acao_marcar"),
         path('consolidar/', acao_consolidar, name="acao_consolidar"),
+        path('alterar/', acao_aletrar, name="acao_aletrar"),
         # path('busca/', acao_busca, name="acao_busca"),
         path('gerar/', acao_ata, name="acao_ata"),
         path('excluir/', acao_remover, name="acao_remover"),
@@ -26,6 +27,8 @@ if settings.DEBUG:
         path('cancelar/<int:id>', cancelar, name="cancelar"),
         path('excluir/<int:id>', remover, name="remover"),
         path('marcar/<int:id>', marcar_reuniao, name="marcar_reuniao"),
+
+        path('alterar/<int:id>', alterar_reuniao, name="alterar_reuniao"),
         path('consolidar/<int:id>', consolidar_reuniao, name="consolidar_reuniao"),
         path('detalhes/<int:id>', ver_info, name="ver_info"),
         path('busca/', resultado_busca, name="resultado_busca"),

@@ -4,7 +4,7 @@
 	{{ titulo }}
 {% endblock titulo %}
 {% block nome_pagina %}
-	Resultados da Busca
+	Notificações
 {% endblock nome_pagina %}
 
 {% block conteudo %}
@@ -25,7 +25,7 @@
     <form class="form-horizontal" method="POST" action="{%url 'listar' %}">
 			{% csrf_token %}
 			<input type="hidden" class="form-control" name="status"  value={{alerta.id}}>
-			<button  class="btn btn-sm btn-outline list-group-item list-group-item-action" type="submit">Marcar com visualizada  </button>
+			<button  class="btn btn-sm btn-outline-info list-group-item " type="submit">Marcar como visualizada  </button>
 		</form>
 
     <span class="badge "><form class="form-horizontal" method="POST" action="{%url 'listar' %}">
