@@ -149,11 +149,13 @@ def agendar_tipo(request):
 
 @login_required()
 def calendario(request):
-    if request.method == "POST":
-        pass
+    usuario = request.user
+    print(usuario)
     notificacao = alerta_services.contar(request.user)
     reunioes = reuniao_service.retornar_tudo()
     return render(request, 'reunioes/main.html', {"reunioes": reunioes, "notificacao": notificacao})
+
+
 
 @login_required()
 def resultado_busca(request):
@@ -161,7 +163,13 @@ def resultado_busca(request):
     if request.method == "POST":
         semestre = request.POST['busca']
         resultados = reuniao_service.retornar_por_semestre(semestre)
-    return render(request, 'reunioes/busca.html', { "notificacao": notificacao,"resultados":resultados,"semestre":semestre})
+    return render(request, 'reunioes/info_reuniao.html', { "notificacao": notificacao,"resultados":resultados,"semestre":semestre})
+
+@login_required()
+def ver_info(request,id):
+    notificacao = alerta_services.contar(request.user)
+    reuniao = reuniao_service.retornar_reuniao_id(id)
+    return render(request, 'reunioes/info_reuniao.html', { "notificacao": notificacao,"reuniao":reuniao})
 
 
 @login_required()

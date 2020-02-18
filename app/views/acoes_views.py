@@ -57,3 +57,12 @@ def acao_busca(request):
         return redirect("resultado_busca",semestre)
     else:
         return redirect("calendario")
+
+
+@login_required()
+def acao_info(request):
+    if request.method == "POST":
+        id = request.POST['id']
+        return redirect("ver_info", id)
+    else:
+        return redirect("listar")

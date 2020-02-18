@@ -125,7 +125,6 @@ class Reuniao(models.Model):
     status = models.CharField(max_length=1, choices=STATUS_CHOICES, default="1", null=False, blank=False)
     cor = models.CharField(max_length=1, choices=COR_CHOICES,default="1", null=False, blank=False)
 
-
 class Alerta(models.Model):
     STATUS_CHOICES = (
         ("1", "Novo"),

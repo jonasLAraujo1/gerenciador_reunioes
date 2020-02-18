@@ -7,9 +7,18 @@ from django.template.response import TemplateResponse
 from .views.acoes_views import *
 from .views.reunioes_views import *
 from .views.usuario_views import *
-from  .views import alerta_views
+from  .views.alerta_views import *
 
 if settings.DEBUG:
+    urls_acoes = [
+        path('marcar/', acao_marcar, name="acao_marcar"),
+        path('consolidar/', acao_consolidar, name="acao_consolidar"),
+        # path('busca/', acao_busca, name="acao_busca"),
+        path('gerar/', acao_ata, name="acao_ata"),
+        path('excluir/', acao_remover, name="acao_remover"),
+        path('cancelar/', acao_cancelar, name="acao_cancelar"),
+        path('info/', acao_info, name="acao_info"),
+    ]
     urls_reuniao = [
         path('agendar/', agendar_reuniao, name="agendar_reuniao"),
         path('tipo/', agendar_tipo, name="agendar_tipo"),
@@ -18,14 +27,9 @@ if settings.DEBUG:
         path('excluir/<int:id>', remover, name="remover"),
         path('marcar/<int:id>', marcar_reuniao, name="marcar_reuniao"),
         path('consolidar/<int:id>', consolidar_reuniao, name="consolidar_reuniao"),
-        path('marcar/', acao_marcar, name="acao_marcar"),
-        path('consolidar/', acao_consolidar, name="acao_consolidar"),
-        #path('busca/', acao_busca, name="acao_busca"),
+        path('detalhes/<int:id>', ver_info, name="ver_info"),
         path('busca/', resultado_busca, name="resultado_busca"),
-        path('notificacoes/', alerta_views.listar, name="listar"),
-        path('gerar/', acao_ata, name="acao_ata"),
-        path('excluir/', acao_remover, name="acao_remover"),
-        path('cancelar/', acao_cancelar, name="acao_cancelar"),
+        path('notificacoes/', listar, name="listar"),
         path('ata/<int:id>', ata, name="ata"),
     ]
     urls_usuario = [
@@ -36,5 +40,5 @@ if settings.DEBUG:
         path('logout/', deslogar_usuario, name="deslogar_usuario"),
         url(r'^', TemplateResponse, {'template': '404.html'}),
     ]
-    urlpatterns = urls_reuniao+urls_usuario
+    urlpatterns = urls_acoes+urls_reuniao+urls_usuario
 

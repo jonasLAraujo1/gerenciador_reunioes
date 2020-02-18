@@ -25,13 +25,13 @@
     <form class="form-horizontal" method="POST" action="{%url 'listar' %}">
 			{% csrf_token %}
 			<input type="hidden" class="form-control" name="status"  value={{alerta.id}}>
-			<button  class="btn btn-sm btn-outline list-group-item list-group-item-action" type="submit">Visualizada  </button>
+			<button  class="btn btn-sm btn-outline list-group-item list-group-item-action" type="submit">Marcar com visualizada  </button>
 		</form>
 
     <span class="badge "><form class="form-horizontal" method="POST" action="{%url 'listar' %}">
 		{% csrf_token %}
 		<input type="hidden" class="form-control" name="id"  value={{alerta.id}}>
-		<button  class="btn btn-sm btn-outline-danger list-group-item" type="submit"> excluir </button>
+		<button  class="btn btn-sm btn-outline-danger list-group-item" type="submit"> Excluir </button>
 	</form></span>
   </li>
 </ul>

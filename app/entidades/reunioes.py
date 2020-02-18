@@ -8,6 +8,7 @@ class Reuniao():
         self.pauta = pauta
         self.semestre = semestre
         self.local = local
+
         self.participantes = participantes
         self.observacoes = observacoes
         self.deliberacoes = deliberacoes
@@ -20,7 +21,6 @@ class Tipo():
 
     def __init__(self, titulo):
         self.titulo = titulo
-
 
 class Data():
     """docstring for Tipo"""
