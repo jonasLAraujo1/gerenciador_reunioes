@@ -36,40 +36,34 @@
         {% endblock extras %}
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-dark sticky-top" style='background-color: #28a745;'>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-         <a class="navbar-brand" href="{% url 'calendario' %}"><button class='btn btn-light btn-lg btn-outline' type='button' >Inicio</button>
-                    </a>
-      </li>
-      <li class="nav-item">
-       <a class="navbar-brand" href="{% url 'agendar_reuniao'%}"> <button class='btn btn-light btn-lg btn-outline' type='button' >Agendar Reunião</button> </a>
-      </li>
-      <li class="nav-item dropdown">
-          <span class="sr-only">(current)</span>
-      </li>
-      <li class="nav-item">
-      </li>
+    <header class="navbar sticky-top navbar-dark " style='background-color: #28a745;'>
 
-    </ul>
-      <nav class="navbar navbar-expand-lg">
-        <ul class="nav justify-content-center">
+        <div class="navbar" >
+            <ul class="nav nav-pills nav-justified">
+                <li class="nav-item">
+                    <a class="navbar-brand" href="{% url 'calendario' %}"><button class='btn btn-light btn-lg btn-outline' type='button' >Inicio</button>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="navbar-brand" href="{% url 'agendar_reuniao'%}"> <button class='btn btn-light btn-lg btn-outline' type='button' >Agendar Reunião</button> </a>
+                </li>
+            </ul>
+        </div>
+        <div class="navbar" >
+            <ul class="nav nav-pills justify-content-center">
                 <li class="nav-item">
                     <div class='card-header 'style='border-radius: 7%;'>
                         <h2>
-                             {% block nome_pagina %}
+                            {% block nome_pagina %}
                             {% endblock nome_pagina %}
                         </h2>
                     </div>
                 </li>
             </ul>
-        </nav>
-       <div class="navbar  navbar-expand-lg" >
-            <ul class="nav nav-justified">
+        </div>
+        <div class="navbar" >
+            <ul class="nav nav-pills nav-justified">
                 <li class="nav-item">
                     <a class="navbar-brand" href="{% url 'listar' %}"><img src="{% static 'app/img/bell.svg'%}"  style="float:left;">
                         {% if notificacao%}
@@ -82,24 +76,27 @@
                         {%endif%}
                     </a>
                 </li>
+                {% block botao_extra %}
 
+                {% endblock botao_extra %}
                 <li class="nav-item">
                     <a class="navbar-brand" href="{% url 'deslogar_usuario' %}"><img src="{% static 'app/img/arrow-out-circle.svg'%}" ></a>
                 </li>
             </ul>
 
         </div>
-
-    <form class="form-inline my-2 my-lg-0" method="POST"  action="{%url 'resultado_busca' %}">
-      {% csrf_token %}
-        <input class='form-control  my-2 my-lg-0' type="search" placeholder='Busca, ex: 2019.1' name='busca' required name=busca >
-        <button class=' btn btn-light btn-outline my-2 my-sm-0' type='submit'>Buscar</button>
-    </form>
-  </div>
-</nav>
-
-
-
+        <div class="navbar" >
+            <ul class="nav nav-pills justify-content-end">
+                <li class="nav-item">
+                    <form class="form-inline" method="POST"  action="{%url 'resultado_busca' %}">
+                        {% csrf_token %}
+                        <input class='form-control  my-2 my-lg-0' type="search" placeholder='Busca, ex: 2019.1' name='busca' required name=busca >
+                        <button class=' btn btn-light btn-outline my-2 my-sm-0' type='submit'>Buscar</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </header>
     <div class="container-fluid" style="background-color: #81C784">
 
         <div class="container-lg"  style="background-color: #fff; margin-top:px">
