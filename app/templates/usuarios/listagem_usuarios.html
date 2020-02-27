@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load meus_filtros %}
+{% block titulo %}
+	{{ titulo }}
+{% endblock titulo %}
+{% block nome_pagina %}
+	Usuarios
+{% endblock nome_pagina %}
+
+{% block conteudo %}
+
+
+{%for usuario in usuarios%}
+
+
+<br>
+<ul class="list-group">
+	 <li class="list-group-item d-flex  justify-content-between align-items-center  active">
+		<h6> {{usuario.nome}}</h6>
+	 </li>
+	<li class="list-group-item d-flex justify-content-between align-items-center">
+		 <p>
+			 {{usuario.email}}
+		 </p>
+
+  </li>
+	<li class="list-group-item d-flex justify-content-between align-items-center">
+		 <p>
+			 {{usuario.is_active}}
+		 </p>
+
+  </li>
+</ul>
+
+
+
+{%endfor%}
+{% endblock conteudo %}

@@ -15,6 +15,7 @@ def agendar_reuniao(reuniao):
         Alerta.objects.create(titulo=titulo,informacoes=informacoes,usuario=usuario,status="1")
         reuniao_bd.participantes.add(usuario)
 
+
 def alterar_reuniao(reuniao_bd,reuniao_nova):
     reuniao_bd.tipo_reuniao=reuniao_nova.tipo_reuniao
     reuniao_bd.data=reuniao_nova.data
@@ -28,6 +29,7 @@ def alterar_reuniao(reuniao_bd,reuniao_nova):
     reuniao_bd.status = reuniao_nova.status
     reuniao_bd.save(force_update=True)
 
+
 def alterar_exceto(reuniao_bd,reuniao_nova):
     reuniao_bd.tipo_reuniao = reuniao_nova.tipo_reuniao
     reuniao_bd.data = reuniao_nova.data
@@ -38,13 +40,14 @@ def alterar_exceto(reuniao_bd,reuniao_nova):
     reuniao_bd.deliberacoes = reuniao_nova.deliberacoes
     reuniao_bd.participantes.set(reuniao_nova.participantes)
     reuniao_bd.status = reuniao_nova.status
-    reuniao_bd.save(force_update=True)
+
     reuniao_bd.save(force_update=True)
 
 
 def cancelar_reuniao(reuniao_bd):
     reuniao_bd.cor = "4"
     reuniao_bd.status = "4"
+    reuniao_bd.save(force_update=True)
 
 def apagar_reuniao(reuniao_bd):
     reuniao_bd.delete()
@@ -56,6 +59,7 @@ def salvar_tipo(tipo):
 def retornar_por_semestre(semestre):
     resultado = Reuniao.objects.all().filter(semestre=semestre)
     return resultado
+
 
 def retornar_tudo():
     reunioes = Reuniao.objects.select_related('data_reuniao').all()
@@ -97,7 +101,14 @@ def retornar_status(status):
         })
     return lista_reunioes
 
+
 def  retornar_reuniao_id(id):
     reunioes = Reuniao.objects.get(id=id)
     return reunioes
 
+
+def usuario_logado(request):
+    usuario = request.user
+    listName = str(usuario).split()
+    usuario = str(listName[0]) + " " + str(listName[1])
+    return usuario

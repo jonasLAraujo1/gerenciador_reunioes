@@ -20,11 +20,19 @@ $(document).ready(function() {
      data-backdrop="static">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
+
             <div class="modal-header">
+                {% if mensagen_erro %}
+                <h4 class="modal-title text-center">{{mensagen_erro}}?</h4>
+                <a href="{% url 'calendario'%}"><button type="button" class="close"aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button></a>
+                {% else %}
                 <h4 class="modal-title text-center">Tem certeza que quer {{acao}} essa reunião?</h4>
                 <a href="{% url 'calendario'%}"><button type="button" class="close"aria-label="Close"><span aria-hidden="true">&times;</span>
                 </button></a>
+
             </div>
+
             <div class="modal-body">
                 <dl class="dl-horizontal">
                     <dt>Tipo da Reunião: {{ reuniao_bd.tipo_reuniao.titulo}}</dt>
@@ -43,6 +51,7 @@ $(document).ready(function() {
                     </nav>
                 </div>
             </div>
+            {%endif%}
         </div>
     </div>
 </div>

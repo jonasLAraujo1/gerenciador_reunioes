@@ -39,6 +39,7 @@ if settings.DEBUG:
         path('cadastro/', decidir_usuario, name="decidir_usuario"),
         path('cadastro/aluno', cadastarar_aluno, name="cadastarar_aluno"),
         path('cadastro/servidor', cadastarar_servidor, name="cadastarar_servidor"),
+        path('lista_usuario',  listar_usuarios, name=" listar_usuarios"),
         path('login/', logar_usuario, name="logar_usuario"),
         path('logout/', deslogar_usuario, name="deslogar_usuario"),
         url(r'^', TemplateResponse, {'template': '404.html'}),

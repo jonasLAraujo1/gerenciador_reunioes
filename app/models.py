@@ -22,6 +22,7 @@ class UserManager(BaseUserManager):
             funcao=funcao,
             cargo=cargo,
             lotacao=lotacao,
+
         )
 
         user.set_password(password)
@@ -60,7 +61,7 @@ class User(AbstractBaseUser):
     funcao = models.CharField(max_length=35, null=True, blank=True)
     cargo = models.CharField(max_length=50,null=False, blank=False,)
     lotacao = models.CharField(max_length=35,null=False, blank=False,)
-    is_active = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
     objects = UserManager()
 
@@ -116,7 +117,7 @@ class Reuniao(models.Model):
     )
     tipo_reuniao = models.ForeignKey('Tipo', on_delete=models.CASCADE)
     data_reuniao = models.ForeignKey('Data', on_delete=models.CASCADE)
-    pauta = models.CharField(max_length=120, null=False, blank=False)
+    pauta = models.CharField(max_length=255, null=False, blank=False)
     local = models.CharField(max_length=120, null=False, blank=False)
     semestre = models.CharField(max_length=6, null=False, blank=False)
     participantes = models.ManyToManyField(User)
