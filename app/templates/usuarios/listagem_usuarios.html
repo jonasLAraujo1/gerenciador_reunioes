@@ -20,19 +20,32 @@
 	 </li>
 	<li class="list-group-item d-flex justify-content-between align-items-center">
 		 <p>
-			 {{usuario.email}}
+			<b>Email: </b> {{usuario.email}}<br>
+            <b>Registro: </b> {{usuario.registro}}
 		 </p>
 
-  </li>
-	<li class="list-group-item d-flex justify-content-between align-items-center">
-		 <p>
-			 {{usuario.is_active}}
-		 </p>
+        <span class="badge ">
+            <form class="form-horizontal" method="POST" action="{%url 'listar_usuarios' %}">
+                {% csrf_token %}
+                <input type="hidden" class="form-control" name="excluir"  value={{usuario.id}}>
+                <button  class="btn btn-sm btn-outline-danger list-group-item" type="submit"> Excluir Usuario </button>
+            </form>
+        </span>
+    </li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        <p>
+            Autorização: {{usuario.is_active}}
+        </p>
 
-  </li>
+        <span class="badge ">
+            <form class="form-horizontal" method="POST" action="{%url 'listar_usuarios' %}">
+                {% csrf_token %}
+                <input type="hidden" class="form-control" name="autorizar"  value={{usuario.id}}>
+                <button  class="btn btn-sm btn-outline-success list-group-item" type="submit"> Autorizar Usuario </button>
+            </form>
+        </span>
+    </li>
 </ul>
-
-
 
 {%endfor%}
 {% endblock conteudo %}

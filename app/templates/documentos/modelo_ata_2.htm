@@ -94,7 +94,7 @@ line-height:115%'><b><span style='font-family:"Arial",sans-serif'>&nbsp;</span><
 justify;text-indent:1.0cm;line-height:150%'><span style='font-size:12.0pt;
 line-height:150%;font-family:"Arial",sans-serif'>Declara-se para todos os fins
 de direito que, foi realizada no dia {{reuniao.data_reuniao.dia|date:'d/m/Y'}}, uma reunião de {{reuniao.tipo_reuniao.titulo}}
- no {{reuniao.local}},com início às {{reuniao.data_reuniao.inicio|date:'H:i'}}, sendo encerrada as {{reuniao.data_reuniao.fim|date:'H:i'}}.
+ no {{reuniao.local}}, com início às {{reuniao.data_reuniao.inicio|date:'H:i'}}, sendo encerrada as {{reuniao.data_reuniao.fim|date:'H:i'}}.
  Onde os participantes discutiram a(s) seguinte(s) pauta(s): {{reuniao.pauta}}. Tendo as contribuições dos
 senhores  {%for participante in participantes%}  {{participante.nome}}, {%endfor%} os quais contribuíram com as arguições:</span></p>
 
@@ -115,41 +115,7 @@ line-height:150%;font-family:"Arial",sans-serif'>{{deliberações}}</span></p>
 justify;text-indent:1.0cm;line-height:150%'><span style='font-size:12.0pt;
 line-height:150%;font-family:"Arial",sans-serif'>&nbsp;</span></p>
 
-<table class=MsoTableGrid border=1 cellspacing=0 cellpadding=0 width=629
- style='width:472.0pt;margin-left:.25pt;border-collapse:collapse;border:none'>
- <tr style='height:28.75pt'>
-  <td width=315 style='width:236.0pt;border:solid windowtext 1.0pt;border-left:
-  none;padding:0cm 5.4pt 0cm 5.4pt;height:28.75pt'>
-  <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
-  text-align:center;line-height:150%'><span style='font-size:12.0pt;line-height:
-  150%;font-family:"Arial",sans-serif'>Participante</span></p>
-  </td>
-  <td width=315 style='width:236.0pt;border-top:solid windowtext 1.0pt;
-  border-left:none;border-bottom:solid windowtext 1.0pt;border-right:none;
-  padding:0cm 5.4pt 0cm 5.4pt;height:28.75pt'>
-  <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
-  text-align:center;line-height:150%'><span style='font-size:12.0pt;line-height:
-  150%;font-family:"Arial",sans-serif'>Assinatura</span></p>
-  </td>
- </tr>
- {%for participante in participantes%}
- <tr style='height:27.7pt'>
-  <td width=314 style='width:235.8pt;border-top:none;border-left:none;
-  border-bottom:solid windowtext 1.0pt;border-right:solid windowtext 1.0pt;
-  padding:0cm 5.4pt 0cm 5.4pt;height:27.7pt'>
-  <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
-  text-align:center;line-height:150%'><span style='font-size:12.0pt;line-height:
-  150%;font-family:"Arial",sans-serif'>{{participante.nome}}&nbsp;</span></p>
-  </td>
-  <td width=315 style='width:236.2pt;border:none;border-bottom:solid windowtext 1.0pt;
-  padding:0cm 5.4pt 0cm 5.4pt;height:27.7pt'>
-  <p class=MsoNormal align=center style='margin-bottom:0cm;margin-bottom:.0001pt;
-  text-align:center;line-height:150%'><span style='font-size:12.0pt;line-height:
-  150%;font-family:"Arial",sans-serif'>&nbsp;</span></p>
-  </td>
- </tr>
- {%endfor%}
-</table>
+
 
 <p class=MsoNormal style='margin-bottom:0cm;margin-bottom:.0001pt;text-align:
 justify;line-height:150%'><span style='font-size:12.0pt;line-height:150%;

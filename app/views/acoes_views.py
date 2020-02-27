@@ -2,6 +2,9 @@ from django.contrib.auth.decorators import login_required
 from django.core.handlers import exception
 from django.shortcuts import redirect,render
 
+from ..services.reuniao_service import usuario_logado
+
+
 @login_required()
 def acao_marcar(request):
     if request.method == "POST":
@@ -62,6 +65,7 @@ def acao_ata(request):
 def acao_busca(request):
     if request.method == "POST":
         semestre = request.POST['busca']
+
         return redirect("resultado_busca",semestre)
     else:
         return redirect("calendario")

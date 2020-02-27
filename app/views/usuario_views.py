@@ -1,13 +1,11 @@
 import re
-
+from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import render, redirect
-#from ..forms import UserForm
 from ..models import User
 from ..admin import UserCreationForm,UserCreationForm2
-from time import sleep
 
 def decidir_usuario(request):
     return render(request, 'usuarios/cadastro_usuario.html')
@@ -79,7 +77,6 @@ def deslogar_usuario(request):
     return redirect('logar_usuario')
 
 
-def listar_usuarios(request):
+def adm(request):
+    return render(request, 'admin/paginas/index.html')
 
-    usuarios=User.objects.all()
-    return render(request, 'usuarios/listagem_usuarios.html', {"usuarios": usuarios})

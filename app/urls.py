@@ -8,7 +8,7 @@ from .views.acoes_views import *
 from .views.reunioes_views import *
 from .views.usuario_views import *
 from  .views.alerta_views import *
-
+from  .views.admin_views import *
 if settings.DEBUG:
     urls_acoes = [
         path('marcar/', acao_marcar, name="acao_marcar"),
@@ -22,7 +22,7 @@ if settings.DEBUG:
     ]
     urls_reuniao = [
         path('agendar/', agendar_reuniao, name="agendar_reuniao"),
-        path('tipo/', agendar_tipo, name="agendar_tipo"),
+
         path('inicio/', calendario, name="calendario"),
         path('cancelar/<int:id>', cancelar, name="cancelar"),
         path('excluir/<int:id>', remover, name="remover"),
@@ -35,14 +35,18 @@ if settings.DEBUG:
         path('notificacoes/', listar, name="listar"),
         path('ata/<int:id>', ata, name="ata"),
     ]
+    urls_admin=[
+        path('lista_usuarios/', listar_usuarios, name="listar_usuarios"),
+        path('tipo/', agendar_tipo, name="agendar_tipo"),
+    ]
     urls_usuario = [
         path('cadastro/', decidir_usuario, name="decidir_usuario"),
-        path('cadastro/aluno', cadastarar_aluno, name="cadastarar_aluno"),
-        path('cadastro/servidor', cadastarar_servidor, name="cadastarar_servidor"),
-        path('lista_usuario',  listar_usuarios, name=" listar_usuarios"),
+        path('cadastro/aluno/', cadastarar_aluno, name="cadastarar_aluno"),
+        path('cadastro/servidor/', cadastarar_servidor, name="cadastarar_servidor"),
         path('login/', logar_usuario, name="logar_usuario"),
         path('logout/', deslogar_usuario, name="deslogar_usuario"),
-        url(r'^', TemplateResponse, {'template': '404.html'}),
+
+        url(r'^', TemplateResponse, {'template': 'excecoes/404.html'}),
     ]
-    urlpatterns = urls_acoes+urls_reuniao+urls_usuario
+    urlpatterns = urls_admin+urls_acoes+urls_reuniao+urls_usuario
 

@@ -53,8 +53,6 @@ def apagar_reuniao(reuniao_bd):
     reuniao_bd.delete()
 
 
-def salvar_tipo(tipo):
-    Tipo.objects.create(titulo=tipo.titulo)
 
 def retornar_por_semestre(semestre):
     resultado = Reuniao.objects.all().filter(semestre=semestre)

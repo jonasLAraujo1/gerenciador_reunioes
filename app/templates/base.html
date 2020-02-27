@@ -36,86 +36,76 @@
         {% endblock extras %}
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-dark sticky-top" style='background-color: #28a745;'>
-            <nav class="navbar navbar-expand-lg">
-        <ul class="nav justify-content-center">
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top" style='background-color: #28a745;'>
+        <nav class="navbar navbar-expand-lg">
+            <ul class="nav justify-content-center">
                 <li class="nav-item">
                     <div class='card-footer 'style='border-radius: 8%;'>
                         <h5>
-                             {% block nome_pagina %}
+                            {% block nome_pagina %}
                             {% endblock nome_pagina %}
                         </h5>
                     </div>
                 </li>
             </ul>
         </nav>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span ><img src="{% static 'app/img/menu.svg'%}" ></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="nav justify-content-center mr-auto">
-      <li class="nav-item">
-         <a class="navbar-brand" href="{% url 'calendario' %}"><button class='btn btn-light btn-lg btn-inline' type='button' >Início</button>
-                    </a>
-      </li>
-      <li class="nav-item">
-       <a class="navbar-brand" href="{% url 'agendar_reuniao'%}"> <button class='btn btn-light btn-lg btn-inline' type='button' >Agendar Reunião</button> </a>
-      </li>
-
-
-    </ul>
-
-       <div class="navbar  navbar-expand-lg" >
-
-                <ul class="nav justify-content-center">
-                    <li class="nav-item">
-                    <a class="navbar-brand" href="{% url 'listar' %}"><img src="{% static 'app/img/bell.svg'%}"  style="float:left;">
-                        {% if notificacao%}
-                        <span class="badge badge-sm badge-danger" style="margin: 0px -3px;">
-                            {%if notificacao %}
-                            {{ notificacao }}
-
-                            {%endif%}
-                        </span>
-                        {%endif%}
-                    </a>
-                </li>
-
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span><img src="{% static 'app/img/menu.svg'%}" ></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="nav justify-content-center mr-auto">
                 <li class="nav-item">
-                    <div class='card-header' style='border-radius: 8%;'>
-                        <h6 style="color:#B2FF59;">
-                             {{usuario}}
-                        </h6>
-                    </div>
+                    <a class="navbar-brand" href="{% url 'calendario' %}">
+                        <button class='btn btn-light btn-lg btn-inline' type='button' >Início</button>
+                    </a>
                 </li>
-                    <li class="nav-item">
-                    <a class="navbar-brand" href="{% url 'deslogar_usuario' %}"><img src="{% static 'app/img/arrow-out-circle2.svg'%}" ></a>
+                <li class="nav-item">
+                    <a class="navbar-brand" href="{% url 'agendar_reuniao'%}">
+                        <button class='btn btn-light btn-lg btn-inline' type='button' >Agendar Reunião</button>
+                    </a>
                 </li>
             </ul>
 
-
-
+            <div class="navbar  navbar-expand-lg" >
+                <ul class=" nav justify-content-center mr-auto">
+                    <li class="nav-item">
+                        <a class="navbar-brand" href="{% url 'listar' %}"><img src="{% static 'app/img/bell.svg'%}"  style="float:left;">
+                            {% if notificacao%}
+                                <span class="badge badge-sm badge-danger" style="margin: 0px -3px;">
+                                    {%if notificacao %}
+                                        {{ notificacao }}
+                                    {%endif%}
+                                </span>
+                            {%endif%}
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <div class='card-header' style='border-radius: 8%;'>
+                            <h6 style="color:#B2FF59;">
+                                {{usuario}}
+                            </h6>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="navbar-brand" href="{% url 'deslogar_usuario' %}">
+                            <img src="{% static 'app/img/arrow-out-circle2.svg'%}" >
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <form class="form-inline my-2 my-lg-0" method="POST"  action="{%url 'resultado_busca' %}">
+                {% csrf_token %}
+                <input class='form-control  my-2 my-lg-0' type="search" placeholder='Busca, ex: 2019.1' name='busca' required name=busca >
+                <button class=' btn btn-light btn-outline my-2 my-sm-0' type='submit'>Buscar</button>
+            </form>
         </div>
-
-    <form class="form-inline my-2 my-lg-0" method="POST"  action="{%url 'resultado_busca' %}">
-      {% csrf_token %}
-        <input class='form-control  my-2 my-lg-0' type="search" placeholder='Busca, ex: 2019.1' name='busca' required name=busca >
-        <button class=' btn btn-light btn-outline my-2 my-sm-0' type='submit'>Buscar</button>
-    </form>
-  </div>
-</nav>
-
-
+    </nav>
 
     <div class="container-fluid" style="background-color: #81C784">
-
         <div class="container-lg"  style="background-color: #fff; margin-top:px">
             {% block conteudo %}
             {% endblock conteudo %}
         </div>
     </div>
-
-
-
     </body>
 </html>

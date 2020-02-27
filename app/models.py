@@ -118,6 +118,7 @@ class Reuniao(models.Model):
     tipo_reuniao = models.ForeignKey('Tipo', on_delete=models.CASCADE)
     data_reuniao = models.ForeignKey('Data', on_delete=models.CASCADE)
     pauta = models.CharField(max_length=255, null=False, blank=False)
+    presidente = models.CharField(max_length=120, null=True, blank=True)
     local = models.CharField(max_length=120, null=False, blank=False)
     semestre = models.CharField(max_length=6, null=False, blank=False)
     participantes = models.ManyToManyField(User)
@@ -135,3 +136,8 @@ class Alerta(models.Model):
     informacoes = models.TextField(null=True, blank=True)
     usuario = models.ForeignKey('User', on_delete=models.CASCADE)
     status = models.CharField(max_length=1, choices=STATUS_CHOICES, default="1", null=False, blank=False)
+
+
+class Departamentos(models.Model):
+    Nome = models.CharField(max_length=120, null=False, blank=False)
+    Chefia = models.ForeignKey('User', on_delete=models.CASCADE)
