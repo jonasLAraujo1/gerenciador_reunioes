@@ -36,7 +36,6 @@
 		events: [
 		 {% for i in reunioes %} { id: "{{ i.id}}", title: "{{ i.title}}", start: '{{ i.start}}', end: '{{ i.end }}',info: '{{ i.status}}',color: '{{ i.color }}', }, {% endfor %}
 
-
 		]
 
 		});

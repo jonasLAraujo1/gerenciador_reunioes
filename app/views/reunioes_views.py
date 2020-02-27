@@ -91,6 +91,7 @@ def marcar_reuniao(request, id):
 
 @login_required()
 def consolidar_reuniao(request, id):
+
     reuniao_bd = reuniao_service.retornar_reuniao_id(id)
     data_bd = data_services.retornar_data_id(id)
     notificacao = alerta_services.contar(request.user)
@@ -185,10 +186,12 @@ def agendar_tipo(request):
 @login_required()
 def calendario(request):
     usuario = request.user
+    listName=str(usuario).split()
+    usuario=str(listName[0])+" "+str(listName[1])
 
     notificacao = alerta_services.contar(request.user)
     reunioes = reuniao_service.retornar_tudo()
-    return render(request, 'reunioes/main.html', {"reunioes": reunioes, "notificacao": notificacao})
+    return render(request, 'reunioes/main.html', {"reunioes": reunioes, "notificacao": notificacao, "usuario":usuario})
 
 
 

@@ -37,6 +37,18 @@
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark sticky-top" style='background-color: #28a745;'>
+            <nav class="navbar navbar-expand-lg">
+        <ul class="nav justify-content-center">
+                <li class="nav-item">
+                    <div class='card-footer 'style='border-radius: 8%;'>
+                        <h5>
+                             {% block nome_pagina %}
+                            {% endblock nome_pagina %}
+                        </h5>
+                    </div>
+                </li>
+            </ul>
+        </nav>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -54,23 +66,7 @@
       </li>
       <li class="nav-item">
       </li>
-
-    </ul>
-      <nav class="navbar navbar-expand-lg">
-        <ul class="nav justify-content-center">
-                <li class="nav-item">
-                    <div class='card-header 'style='border-radius: 7%;'>
-                        <h2>
-                             {% block nome_pagina %}
-                            {% endblock nome_pagina %}
-                        </h2>
-                    </div>
-                </li>
-            </ul>
-        </nav>
-       <div class="navbar  navbar-expand-lg" >
-            <ul class="nav nav-justified">
-                <li class="nav-item">
+         <li class="nav-item">
                     <a class="navbar-brand" href="{% url 'listar' %}"><img src="{% static 'app/img/bell.svg'%}"  style="float:left;">
                         {% if notificacao%}
                         <span class="badge badge-sm badge-danger" style="margin: 0px -3px;">
@@ -83,10 +79,28 @@
                     </a>
                 </li>
 
+
+
+
+
+    </ul>
+
+       <div class="navbar  navbar-expand-lg" >
+
+                <ul class="nav justify-content-center">
                 <li class="nav-item">
-                    <a class="navbar-brand" href="{% url 'deslogar_usuario' %}"><img src="{% static 'app/img/arrow-out-circle.svg'%}" ></a>
+                    <div class='card-header' style='border-radius: 8%;'>
+                        <h6 style="color:#B2FF59;">
+                             {{usuario}}
+                        </h6>
+                    </div>
+                </li>
+                    <li class="nav-item">
+                    <a class="navbar-brand" href="{% url 'deslogar_usuario' %}"><img src="{% static 'app/img/arrow-out-circle2.svg'%}" ></a>
                 </li>
             </ul>
+
+
 
         </div>
 
