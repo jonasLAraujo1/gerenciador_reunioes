@@ -18,8 +18,13 @@ def cadastarar_servidor(request):
         form_usuario = UserCreationForm2(request.POST)
 
         if form_usuario.is_valid():
-            form_usuario.save()
-            sucesso = "ok"
+            cpf = form_usuario.cleaned_data['cpf']
+
+            if not re.search(r'\d\d\d\d\d\d\d\d\d\d\d', str(cpf)):
+                mensagem = {"erro CPF": "CPF Inválido"}
+            else:
+                form_usuario.save()
+                sucesso = "ok"
 
 
         else:
@@ -35,19 +40,20 @@ def cadastarar_aluno(request):
     sucesso=""
     if request.method == "POST":
         form_usuario = UserCreationForm(request.POST)
-
         if form_usuario.is_valid():
             matricula=form_usuario.cleaned_data['registro']
-            print(matricula)
-            print(re.search(r'\d', str(matricula)))
-            form_usuario.save()
-            sucesso="ok"
-            #return redirect('sucesso_usuario')
+
+            if not re.search(r'\d\d\d\d\d\d\d\d\d\d\d', str(matricula)):
+                mensagem={"erro matricula": "Matricula Inválida"}
+            else:
+                form_usuario.save()
+                sucesso="ok"
+
         else:
             mensagem=form_usuario.errors
     else:
         form_usuario = UserCreationForm()
-    print(mensagem)
+
     return render(request, 'usuarios/form_cadastro_aluno.html',
                   {"form_usuario": form_usuario,'mensagem':mensagem,'sucesso':sucesso})
 
@@ -75,8 +81,4 @@ def logar_usuario(request):
 def deslogar_usuario(request):
     logout(request)
     return redirect('logar_usuario')
-
-
-def adm(request):
-    return render(request, 'admin/paginas/index.html')
 

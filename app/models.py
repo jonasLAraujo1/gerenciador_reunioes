@@ -15,7 +15,6 @@ class UserManager(BaseUserManager):
 
         user = self.model(
             email=self.normalize_email(email),
-            #date_of_birth=date_of_birth,
             nome=nome,
             registro=registro,
             cpf=cpf,
@@ -59,8 +58,8 @@ class User(AbstractBaseUser):
     registro = models.CharField(max_length=11, null=False, blank=False, unique=True)
     cpf = models.CharField(max_length=11, null=False, blank=False)
     funcao = models.CharField(max_length=35, null=True, blank=True)
-    cargo = models.CharField(max_length=50,null=False, blank=False,)
-    lotacao = models.CharField(max_length=35,null=False, blank=False,)
+    cargo = models.CharField(max_length=50,null=False, blank=False)
+    lotacao = models.CharField(max_length=35,null=False, blank=False)
     is_active = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
     objects = UserManager()
@@ -126,6 +125,9 @@ class Reuniao(models.Model):
     deliberacoes = models.TextField(null=True, blank=True)
     status = models.CharField(max_length=1, choices=STATUS_CHOICES, default="1", null=False, blank=False)
     cor = models.CharField(max_length=1, choices=COR_CHOICES,default="1", null=False, blank=False)
+    def __str__(self):
+        return self.pauta
+
 
 class Alerta(models.Model):
     STATUS_CHOICES = (
@@ -139,5 +141,7 @@ class Alerta(models.Model):
 
 
 class Departamentos(models.Model):
-    Nome = models.CharField(max_length=120, null=False, blank=False)
-    Chefia = models.ForeignKey('User', on_delete=models.CASCADE)
+    nome = models.CharField(max_length=120, null=False, blank=False)
+    chefia = models.ForeignKey('User', on_delete=models.CASCADE)
+    def __str__(self):
+        return self.nome
