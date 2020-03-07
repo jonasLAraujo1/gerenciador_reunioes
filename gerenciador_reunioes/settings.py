@@ -78,17 +78,22 @@ WSGI_APPLICATION = 'gerenciador_reunioes.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'reunioes',
+#         'USER': 'root',
+#         'PASSWORD': '12345',
+#         'HOST': 'localhost',
+#         'PORT': '3306'
+#     }
+# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'reunioes',
-        'USER': 'root',
-        'PASSWORD': '12345',
-        'HOST': 'localhost',
-        'PORT': '3306'
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'mydatabase',
     }
 }
-
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 
@@ -111,13 +116,13 @@ TIME_FORMAT = ('%H:%M')
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-TIME_ZONE = 'America/Chicago'
-LANGUAGE_CODE = 'pt-BR'
+TIME_ZONE = 'America/Sao_Paulo'
+LANGUAGE_CODE = 'pt-br'
 
 
-USE_I18N = False
+USE_I18N = True
 
-USE_L10N = False
+USE_L10N = True
 
 USE_TZ = True
 

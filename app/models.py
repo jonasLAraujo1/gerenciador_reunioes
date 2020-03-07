@@ -49,6 +49,9 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser):
+    class Meta:
+        verbose_name = "Usuario"
+        verbose_name_plural = "Usuarios"
     email = models.EmailField(
         verbose_name='email address',
         max_length=255,
@@ -56,16 +59,17 @@ class User(AbstractBaseUser):
     )
     nome = models.CharField(max_length=120, null=False, blank=False)
     registro = models.CharField(max_length=11, null=False, blank=False, unique=True)
-    cpf = models.CharField(max_length=11, null=False, blank=False)
-    funcao = models.CharField(max_length=35, null=True, blank=True)
-    cargo = models.CharField(max_length=50,null=False, blank=False)
-    lotacao = models.CharField(max_length=35,null=False, blank=False)
+    cpf = models.CharField(max_length=11, null=True, blank=True)
+    funcao = models.CharField(max_length=50, null=True, blank=True)
+    cargo = models.CharField(max_length=50,null=True, blank=True)
+    lotacao = models.CharField(max_length=120,null=False, blank=False)
     is_active = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
+    servidor = models.BooleanField(default=False)
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['nome','regsitro', 'cpf', 'cargo', 'lotacao']
+    REQUIRED_FIELDS = ['nome','registro', 'cpf', 'cargo', 'lotacao']
 
 
     def __str__(self):
@@ -89,12 +93,13 @@ class User(AbstractBaseUser):
 
 class Tipo(models.Model):
     titulo = models.CharField(max_length=120, null=False, blank=False, unique=True)
-
     def __str__(self):
         return self.titulo
 
 
 class Data(models.Model):
+    class Meta:
+        verbose_name_plural = "Datas"
     dia = models.DateField(null=False, blank=False)
     inicio = models.TimeField(null=False, blank=False)
     fim = models.TimeField(null=False, blank=False)
@@ -102,6 +107,8 @@ class Data(models.Model):
 
 
 class Reuniao(models.Model):
+    class Meta:
+        verbose_name_plural = "Reuniões"
     COR_CHOICES = (
         ("1", "#FFF176"),
         ("2", "#4CAF50"),
@@ -130,18 +137,24 @@ class Reuniao(models.Model):
 
 
 class Alerta(models.Model):
+    class Meta:
+        verbose_name = "Alerta"
+        verbose_name_plural = "Alertas"
     STATUS_CHOICES = (
         ("1", "Novo"),
         ("2", "Visualizado"),
     )
+
     titulo = models.CharField(max_length=120, null=False, blank=False)
     informacoes = models.TextField(null=True, blank=True)
+    alters_data = models.DateTimeField(auto_now=True)
     usuario = models.ForeignKey('User', on_delete=models.CASCADE)
     status = models.CharField(max_length=1, choices=STATUS_CHOICES, default="1", null=False, blank=False)
 
 
-class Departamentos(models.Model):
+
+class Departamento(models.Model):
     nome = models.CharField(max_length=120, null=False, blank=False)
-    chefia = models.ForeignKey('User', on_delete=models.CASCADE)
+    chefia = models.ForeignKey('User', on_delete=models.PROTECT)
     def __str__(self):
         return self.nome

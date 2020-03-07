@@ -233,5 +233,10 @@ def ata(request, id):
     context = {'reuniao': reuniao,'usuario':usuario,'participantes':participantes}
     return render_to_pdf_response(request,template,context)
 
-
+def vizualizar(request,id):
+    usuario = request.user
+    reuniao_bd = reuniao_service.retornar_reuniao_id(id)
+    return render(request, 'reunioes/info_reuniao.html',
+                  {'reuniao': reuniao_bd, "usuario": usuario})
+    pass
 

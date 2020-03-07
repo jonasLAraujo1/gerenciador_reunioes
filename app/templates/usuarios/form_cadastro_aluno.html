@@ -43,6 +43,7 @@
 				<label>Matricula </label>
 				{{ form_usuario.registro|addclass:'form-control'}}
 			</div>
+
 			<div class="form-goup">
 				{{ form_usuario.password1.erros }}
 				<label>Senha </label>
@@ -53,6 +54,11 @@
 				<label>Confirmação de senha </label>
 				{{ form_usuario.password2|addclass:'form-control'}}
 			</div>
+			<div class="form-goup">
+					{{  form_usuario.lotacao.erros }}
+					<label>Lotação</label>
+					{{ form_usuario.lotacao|addclass:'form-control'}}
+				</div>
 			<br>
 			<div class="form-goup">
 				<input type="submit" class="btn btn-sm btn-info" value="Salvar">

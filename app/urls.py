@@ -27,6 +27,7 @@ if settings.DEBUG:
         path('cancelar/<int:id>', cancelar, name="cancelar"),
         path('excluir/<int:id>', remover, name="remover"),
         path('marcar/<int:id>', marcar_reuniao, name="marcar_reuniao"),
+        path('informacao/<int:id>', vizualizar, name="vizualizar"),
 
         path('alterar/<int:id>', alterar_reuniao, name="alterar_reuniao"),
         path('consolidar/<int:id>', consolidar_reuniao, name="consolidar_reuniao"),

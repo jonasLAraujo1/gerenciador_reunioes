@@ -20,11 +20,6 @@ class FormAgendaReuniao(forms.ModelForm):
         model = Reuniao
         fields = ['tipo_reuniao','pauta','local','semestre','participantes']
 
-class FormUsuario(forms.ModelForm):
-    class Meta:
-        model = User
-        fields = ['nome','funcao']
-
 
 class FormTipo(forms.ModelForm):
     class Meta:

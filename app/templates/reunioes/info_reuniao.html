@@ -9,48 +9,27 @@
 
 {% block conteudo %}
 <br>
-<div class="card " >
-<div class="card-header">
-	<h4 class="card-title">
-		Informações da Reunião
-	</h4>
-	</div>
-<div class="card-body">
-	<ul class="list-group">
-		
-	<li class="list-group-item d-flex list-group-item-dark justify-content-between align-items-center">
-		<h6> Tipo</h6>
-		<p>
-			{{reuniao.tipo}}
-		</p>
-	 </li>
-		<li class="list-group-item d-flex list-group-item-dark justify-content-between align-items-center">
-		<h6> Local</h6>
-		<p>
-			{{reuniao.local}}
-		</p>
-	 </li>
 
-		<li class="list-group-item d-flex list-group-item-dark justify-content-between align-items-center">
-		<h6>Data</h6>
-		<p>
-			{{reuniao.data_reuniao.dia|date:"d/m/Y"}}
-		</p>
-	 </li>
-
-		<li class="list-group-item d-flex list-group-item-dark justify-content-centaer align-items-center">
-		<h6> Horarios</h6>
-		<p>
-			inicio<br>
+<div class="card text-center">
+  <div class="card-header">
+	  <h4 class="card-title">
+    Informações da Reunião
+	  </h4>
+  </div>
+  <div class="card-body">
+	   <h6 class="card-title">
+	  <p>Tipo: {{reuniao.tipo_reuniao.titulo}}</p>
+    <p class="card-text">Local: {{reuniao.local}} Data: {{reuniao.data_reuniao.dia|date:"d/m/Y"}}Inicio:
 			{{reuniao.data_reuniao.inicio|date:'H:i'}}
-		</p>
-			<h6> Fim</h6>
-		<p>
-			{{reuniao.data_reuniao.fim|date:'H:i'}}
-		</p>
-	 </li>
-	</ul>
-				</div>
-</div>
+			Fim:
+			{{reuniao.data_reuniao.inicio|date:'H:i'}}</p>
+	   </h6>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+  <div class="card-footer text-muted">
+    2 days ago
+  </div>
+
+
 
 		{% endblock conteudo %}

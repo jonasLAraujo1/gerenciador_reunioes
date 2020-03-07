@@ -19,13 +19,12 @@ def cadastarar_servidor(request):
 
         if form_usuario.is_valid():
             cpf = form_usuario.cleaned_data['cpf']
-
             if not re.search(r'\d\d\d\d\d\d\d\d\d\d\d', str(cpf)):
                 mensagem = {"erro CPF": "CPF Inválido"}
             else:
+                form_usuario.servidor=True
                 form_usuario.save()
                 sucesso = "ok"
-
 
         else:
             mensagem = form_usuario.errors

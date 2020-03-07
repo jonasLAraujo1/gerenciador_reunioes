@@ -12,10 +12,11 @@ class UserCreationForm(forms.ModelForm):
     fields, plus a repeated password."""
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
     password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput)
+    lotacao = forms.ModelChoiceField(queryset=Departamento.objects.all())
 
     class Meta:
         model = User
-        fields = ('email','nome', 'registro')
+        fields = ('email','nome', 'registro','lotacao')
 
     def clean_password2(self):
         # Check that the two password entries match
@@ -37,8 +38,10 @@ class UserCreationForm2(forms.ModelForm):
     fields, plus a repeated password."""
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
     password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput)
-    lotacao = forms.ModelChoiceField(queryset=Departamentos.objects.all())
-    REQUIRED_FIELDS = ['email','nome', 'registro','cpf','cargo','lotacao']
+    lotacao = forms.ModelChoiceField(queryset=Departamento.objects.all())
+    cargo = forms.CharField(required=True)
+    cpf = forms.CharField(max_length=11,required=True)
+
     class Meta:
         model = User
         fields = ('email','nome', 'registro','cpf','funcao','cargo','lotacao' )
@@ -55,9 +58,11 @@ class UserCreationForm2(forms.ModelForm):
         # Save the provided password in hashed format
         user = super().save(commit=False)
         user.set_password(self.cleaned_data["password1"])
+        user.servidor=True
         if commit:
             user.save()
         return user
+
 
 
 class UserChangeForm(forms.ModelForm):
@@ -66,7 +71,7 @@ class UserChangeForm(forms.ModelForm):
     password hash display field.
     """
     password = ReadOnlyPasswordHashField()
-    lotacao = forms.ModelChoiceField(queryset=Departamentos.objects.all())
+    lotacao = forms.ModelChoiceField(queryset=Departamento.objects.all())
     class Meta:
         model = User
         fields = ('email', 'nome', 'registro', 'cpf', 'funcao', 'cargo', 'lotacao')
@@ -86,19 +91,19 @@ class UserAdmin(BaseUserAdmin):
     # The fields to be used in displaying the User model.
     # These override the definitions on the base UserAdmin
     # that reference specific fields on auth.User.
-    list_display = ('nome','email', 'registro','is_active')
+    list_display = ('email', 'nome', 'registro', 'cpf', 'funcao', 'cargo', 'lotacao','is_active','servidor')
     list_filter = ('is_admin',)
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
-        ('Informação Pessoal', {'fields': ('registro','nome')}),
-        ('Permissões', {'fields': ('is_admin','is_active')}),
+        ('Informação Pessoal', {'fields': ('registro','nome' ,'cpf', 'funcao', 'cargo', 'lotacao')}),
+        ('Permissões', {'fields': ('is_admin','is_active','servidor')}),
     )
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
     # overrides get_fieldsets to use this attribute when creating a user.
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('email','nome', 'registro', 'password1', 'password2')}
+            'fields': ('email','nome', 'registro', 'password1', 'password2', 'lotacao')}
         ),
     )
     search_fields = ('email',)
@@ -109,6 +114,8 @@ class UserAdmin(BaseUserAdmin):
 admin.site.register(User, UserAdmin)
 admin.site.register(Reuniao)
 admin.site.register(Tipo)
-admin.site.register(Departamentos)
+admin.site.register(Departamento)
+admin.site.register(Alerta)
 # ... and, since we're not using Django's built-in permissions,
 # unregister the Group model from admin.
+admin.site.unregister(Group)

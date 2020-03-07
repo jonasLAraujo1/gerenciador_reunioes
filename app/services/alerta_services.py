@@ -1,4 +1,4 @@
-from ..models import Alerta
+from ..models import Alerta, Departamento
 
 def criar_alerta(alerta):
     Alerta.objects.create(titulo=alerta.titulo,observacoes=alerta.observacoes,usario=alerta.usuario,status=alerta.status)
@@ -12,9 +12,15 @@ def contar(usuario):
     return contagem
 
 def listar_todos(usuario):
-    alertas = Alerta.objects.filter(usuario=usuario).all()
+    alertas = Alerta.objects.filter(usuario=usuario).all().order_by('-alters_data')
     return alertas
 
+def novo_usuario(usuario):
+    usuario.departamento
+    titulo = "Novo Usuario Aguadando Autorização"
+    informacoes = "Uma nova Reunião com a Pauta: " + str(reuniao.pauta) + \
+                  " Foi Agendada Para o Dia: " + str(reuniao.data.dia.strftime('%d/%m/%Y')) + \
+                  " Com inicio às: " + str(reuniao.data.inicio.strftime('%H:%M'))
 
 def apagar_alerta(id):
     alerta_bd=Alerta.objects.get(id=id)

@@ -8,7 +8,7 @@ def agendar_reuniao(reuniao):
     titulo="Reunião de "+str(reuniao.tipo_reuniao)
     informacoes = "Uma nova Reunião com a Pauta: " + str(reuniao.pauta) + \
                   " Foi Agendada Para o Dia: " + str(reuniao.data.dia.strftime('%d/%m/%Y'))+\
-                  " Com inicio as: "+str(reuniao.data.inicio.strftime('%H:%M'))
+                  " Com inicio às: "+str(reuniao.data.inicio.strftime('%H:%M'))
     # print(titulo,informacoes)
     for i in reuniao.participantes:
         usuario= User.objects.get(id=i.id)
