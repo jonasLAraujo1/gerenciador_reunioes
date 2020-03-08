@@ -147,9 +147,13 @@ class Alerta(models.Model):
 
     titulo = models.CharField(max_length=120, null=False, blank=False)
     informacoes = models.TextField(null=True, blank=True)
-    alters_data = models.DateTimeField(auto_now=True)
+    alters_data = models.DateTimeField(auto_now_add=True)
     usuario = models.ForeignKey('User', on_delete=models.CASCADE)
     status = models.CharField(max_length=1, choices=STATUS_CHOICES, default="1", null=False, blank=False)
+    url = models.CharField(max_length=120, null=False, blank=False, default="vizualizar")
+    identificador=models.CharField(max_length=120, null=False, blank=False, default="0" )
+    def __str__(self):
+        return self.titulo
 
 
 

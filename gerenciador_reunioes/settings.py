@@ -116,7 +116,7 @@ TIME_FORMAT = ('%H:%M')
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-TIME_ZONE = 'America/Sao_Paulo'
+TIME_ZONE = 'America/Belem'
 LANGUAGE_CODE = 'pt-br'
 
 

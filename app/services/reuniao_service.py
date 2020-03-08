@@ -1,4 +1,4 @@
-from ..models import User,Reuniao, Tipo,Alerta
+from ..models import User,Reuniao
 from .alerta_services import *
 
 def agendar_reuniao(reuniao):
@@ -12,7 +12,7 @@ def agendar_reuniao(reuniao):
     # print(titulo,informacoes)
     for i in reuniao.participantes:
         usuario= User.objects.get(id=i.id)
-        Alerta.objects.create(titulo=titulo,informacoes=informacoes,usuario=usuario,status="1")
+        Alerta.objects.create(titulo=titulo,identificador=reuniao_bd.id,informacoes=informacoes,usuario=usuario,status="1")
         reuniao_bd.participantes.add(usuario)
 
 
@@ -40,7 +40,6 @@ def alterar_exceto(reuniao_bd,reuniao_nova):
     reuniao_bd.deliberacoes = reuniao_nova.deliberacoes
     reuniao_bd.participantes.set(reuniao_nova.participantes)
     reuniao_bd.status = reuniao_nova.status
-
     reuniao_bd.save(force_update=True)
 
 

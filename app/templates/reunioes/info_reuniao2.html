@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load meus_filtros %}
+{% block titulo %}
+	{{ titulo }}
+{% endblock titulo %}
+{% block nome_pagina %}
+	{{ titulo }} Reunião
+{% endblock nome_pagina %}
+
+{% block conteudo %}
+
+	<h2>
+	 Reunião
+	</h2>
+	<div class="form-goup">
+
+			<label>Tipo</label>
+
+		<label>{{reuniao.tipo_reuniao.titulo}}</label>>
+
+		</div>
+
+<div class="form-goup form-inline">
+			<dl>Data
+				<dt>{{ reunai.data_reuniao.dia|date:"d/m/Y"}} </dt></dl>
+			</div>
+
+			<div class="form-inline">
+				<div class="form-goup">
+					<label>Inicio</label>
+					{{ reuniao.data_reuniao.inicio|date:'H:i'}}
+				</div>
+
+				<div class="form-goup">
+					<label>Fim</label>
+					{{ reuniao.data_reuniao.fim|date:'H:i'}}
+				</div>
+			</div>
+
+			<div class="form-goup">
+				{{ reniao.pauta.erros }}
+				<label>Pauta</label>
+				{{ reniao.pauta}}
+			</div>
+
+			<div class="form-goup">
+				{{ reniao.local.erros }}
+				<label>Local</label>
+				{{ reniao.local }}
+			</div>
+
+			<div class="form-goup">
+				{{ reniao.semestre.erros }}
+				<label>Semestre</label>
+				{{ reniao.semestre }}
+			</div>
+		<div class="form-goup">
+				{{ reniao.participantes.erros }}
+				<label>Participantes</label>
+				{{ reniao.participantes }}
+			</div>
+        <div class="form-goup">
+				{{ reniao.deliberacoes.erros }}
+				<label>Deliberações</label>
+				{{ reniao.deliberacoes}}
+			</div>
+		<div class="form-goup">
+				{{ reniao.observacoes.erros }}
+				<label>Observações</label>
+				{{ reniao.observacoes}}
+			</div>
+
+
+		{% endblock conteudo %}

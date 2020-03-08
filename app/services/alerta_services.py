@@ -15,13 +15,6 @@ def listar_todos(usuario):
     alertas = Alerta.objects.filter(usuario=usuario).all().order_by('-alters_data')
     return alertas
 
-def novo_usuario(usuario):
-    usuario.departamento
-    titulo = "Novo Usuario Aguadando Autorização"
-    informacoes = "Uma nova Reunião com a Pauta: " + str(reuniao.pauta) + \
-                  " Foi Agendada Para o Dia: " + str(reuniao.data.dia.strftime('%d/%m/%Y')) + \
-                  " Com inicio às: " + str(reuniao.data.inicio.strftime('%H:%M'))
-
 def apagar_alerta(id):
     alerta_bd=Alerta.objects.get(id=id)
     alerta_bd.delete()
@@ -30,6 +23,12 @@ def atualizar_alerta(alerta_bd,alerta_novo):
    alerta_bd.titulo = alerta_novo.titulo
    alerta_bd.observacoes = alerta_novo.observacoes
    alerta_bd.status = '2'
+
+def alerta_reuniao(identificador,usuario):
+    alerta_bd = Alerta.objects.get(identificador=identificador,usuario=usuario)
+    return alerta_bd
+
+
 
 
 def visualizar_alerta(id):

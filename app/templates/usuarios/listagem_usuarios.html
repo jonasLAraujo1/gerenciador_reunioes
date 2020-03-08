@@ -21,7 +21,14 @@
 	<li class="list-group-item d-flex justify-content-between align-items-center">
 		 <p>
 			<b>Email: </b> {{usuario.email}}<br>
-            <b>Registro: </b> {{usuario.registro}}
+             {%if usuario.servidor%}
+            <b>SIAPE: </b> {{usuario.registro}}<br>
+              <b>CPF: </b> {{usuario.cpf}}<br>
+             <b>Tipo: </b> {{usuario.cargo}}<br>
+             {%else%}
+             <b>Matricula: </b> {{usuario.registro}}<br>
+              <b>Tipo: </b> ALuno<br>
+            {%endif%}
 		 </p>
 
         <span class="badge ">
@@ -34,7 +41,7 @@
     </li>
     <li class="list-group-item d-flex justify-content-between align-items-center">
         <p>
-            Autorização: {{usuario.is_active}}
+            Autorização: Não Autorizado
         </p>
 
         <span class="badge ">

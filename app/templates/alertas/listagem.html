@@ -13,11 +13,49 @@
 {%for alerta in alertas%}
 	{%if alerta.status == "1"%}
 		<br>
-		<ul class="list-group order-last">
+
+		<ul class="list-group">
+
+			{%if alerta.identificador == '0' %}
+			 <li class="list-group-item d-flex  justify-content-between align-items-center  active">
+				<h6> {{alerta.titulo}}</h6>
+				<small>{{alerta.alters_data}}</small>
+			</li>
+
+			<li class="list-group-item d-flex justify-content-between align-items-center">
+				<p>
+					{{alerta.informacoes}}
+					{{alerta.identificador}}
+
+				</p>
+
+				<span class="badge ">
+				<form action="{%url 'listar' %}" class="form-horizontal" method="POST">
+					{% csrf_token %}
+					<input class="form-control" name="status" type="hidden"  value={{alerta.id}}>
+					<button  class="btn btn-sm btn-outline-info list-group-item " type="submit">Marcar como visualizada
+					</button>
+				</form>
+				</span>
+				<span class="badge ">
+					<form action="{%url 'listar' %}" class="form-horizontal" method="POST">
+						{% csrf_token %}
+						<input class="form-control" name="id" type="hidden"  value={{alerta.id}}>
+						<button  class="btn btn-sm btn-outline-danger list-group-item" type="submit"> Excluir </button>
+					</form>
+				</span>
+			</li>
+			{%else%}
+			{% ifequal alerta.url  'vizualizar' %}
+			<a class="list-group-item list-group-item-action flex-column align-items-start active" href="{% url alerta.url alerta.identificador %}">
+				{%else%}
+				<a class="list-group-item list-group-item-action flex-column align-items-start active" href="{% url alerta.url%}">
+				{% endifequal%}
 			<li class="list-group-item d-flex  justify-content-between align-items-center  active">
 				<h6> {{alerta.titulo}}</h6>
 				<small>{{alerta.alters_data}}</small>
 			</li>
+			 </a>
 			<li class="list-group-item d-flex justify-content-between align-items-center">
 				<p>
 					{{alerta.informacoes}}
@@ -25,22 +63,16 @@
 
 				</p>
 				<span class="badge ">
-				<form class="form-horizontal" method="POST" action="{%url 'listar' %}">
-					{% csrf_token %}
-					<input type="hidden" class="form-control" name="status"  value={{alerta.id}}>
-					<button  class="btn btn-sm btn-outline-info list-group-item " type="submit">Marcar como visualizada
-					</button>
-				</form>
-				</span>
-				<span class="badge ">
-					<form class="form-horizontal" method="POST" action="{%url 'listar' %}">
+					<form action="{%url 'listar' %}" class="form-horizontal" method="POST">
 						{% csrf_token %}
-						<input type="hidden" class="form-control" name="id"  value={{alerta.id}}>
+						<input class="form-control" name="id" type="hidden"  value={{alerta.id}}>
 						<button  class="btn btn-sm btn-outline-danger list-group-item" type="submit"> Excluir </button>
 					</form>
 				</span>
 			</li>
+			{%endif%}
 		</ul>
+
 	{%endif%}
 {%endfor%}
 {%for alerta in alertas%}
@@ -58,9 +90,9 @@
 					{{alerta.informacoes}}
 				</p>
 				<span class="badge ">
-					<form class="form-horizontal" method="POST" action="{%url 'listar' %}">
+					<form action="{%url 'listar' %}" class="form-horizontal" method="POST">
 						{% csrf_token %}
-						<input type="hidden" class="form-control" name="id"  value={{alerta.id}}>
+						<input class="form-control" name="id" type="hidden"  value={{alerta.id}}>
 						<button  class="btn btn-sm btn-outline-danger list-group-item" type="submit"> excluir </button>
 					</form>
 				</span>

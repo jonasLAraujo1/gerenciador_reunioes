@@ -165,16 +165,13 @@ def alterar_reuniao(request, id):
                    "form_data": form_data,"usuario":usuario})
 
 
-
-
 @login_required()
 def calendario(request):
     usuario=reuniao_service.usuario_logado(request)
-
-
     notificacao = alerta_services.contar(request.user)
     reunioes = reuniao_service.retornar_tudo()
-    return render(request, 'reunioes/main.html', {"reunioes": reunioes, "notificacao": notificacao, "usuario":usuario})
+    user=request.user
+    return render(request, 'reunioes/main.html', {"reunioes": reunioes, "notificacao": notificacao, "usuario":usuario,"user":user})
 
 
 
@@ -234,9 +231,13 @@ def ata(request, id):
     return render_to_pdf_response(request,template,context)
 
 def vizualizar(request,id):
+
     usuario = request.user
+    alerta=alerta_services.alerta_reuniao(id,usuario)
+    usuario = reuniao_service.usuario_logado(request)
+    alerta_services.visualizar_alerta(alerta.id)
     reuniao_bd = reuniao_service.retornar_reuniao_id(id)
+    notificacao = alerta_services.contar(request.user)
     return render(request, 'reunioes/info_reuniao.html',
-                  {'reuniao': reuniao_bd, "usuario": usuario})
-    pass
+                  {'reuniao': reuniao_bd,"notificacao":notificacao, "usuario": usuario,"alerta":alerta})
 

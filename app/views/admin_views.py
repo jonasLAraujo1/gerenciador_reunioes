@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from ..models import User, Tipo
 from ..forms import FormTipo
-from ..services import admin_services
+from ..services import admin_services, alerta_services,reuniao_service
 @login_required()
 def agendar_tipo(request):
     if request.user.is_admin:
@@ -28,22 +28,38 @@ def agendar_tipo(request):
 
 @login_required()
 def listar_usuarios(request):
-    if request.user.is_admin:
-        usuarios=User.objects.all()
+    if request.user.is_admin or request.user.servidor:
+        usuario = reuniao_service.usuario_logado(request)
+        notificacao = alerta_services.contar(request.user)
+        usuarios=User.objects.filter(is_active=False).all()
         if request.method == "POST":
             try:
                 id = request.POST['excluir']
-                usuarios_bd = User.objects.get(id=id)
-                usuarios_bd.delete()
+                acao='excluir'
             except:
                 id = request.POST['autorizar']
-                usuarios_bd=User.objects.get(id=id)
-                usuarios_bd.is_active=True
-                usuarios_bd.save(force_update=True)
-                usuarios=User.objects.all()
-        return render(request, 'usuarios/listagem_usuarios.html', {"usuarios": usuarios})
+                acao = 'autorizar'
+            if acao =='excluir':
+                usuario_bd = User.objects.get(id=id)
+                alerta=alerta_services.alerta_reuniao(id,request.user)
+                alerta_services.visualizar_alerta(alerta.id)
+                usuario_bd.delete()
+                return redirect("listar")
+            elif acao =='autorizar':
+
+                usuario_bd=User.objects.get(id=id)
+                alerta=alerta_services.alerta_reuniao(id,request.user)
+                usuario_bd.is_active=True
+                usuario_bd.save(force_update=True)
+                alerta_services.visualizar_alerta(alerta.id)
+                return redirect("listar")
+
+        return render(request, 'usuarios/listagem_usuarios.html', {"usuarios": usuarios,"usuario":usuario,"notificacao":notificacao})
     else:
         return render(request,'excecoes/acesso_negado.html')
+
+
+
 def adm(request):
     return render(request, 'admin/paginas/index.html')
 

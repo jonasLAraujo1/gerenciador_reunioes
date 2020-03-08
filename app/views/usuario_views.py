@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import render, redirect
-from ..models import User
+from ..models import User,Alerta,Departamento
 from ..admin import UserCreationForm,UserCreationForm2
 
 def decidir_usuario(request):
@@ -22,8 +22,20 @@ def cadastarar_servidor(request):
             if not re.search(r'\d\d\d\d\d\d\d\d\d\d\d', str(cpf)):
                 mensagem = {"erro CPF": "CPF Inválido"}
             else:
-                form_usuario.servidor=True
-                form_usuario.save()
+                adm1 = User.objects.get(email="jonasaraujo23137@gmail.com")
+                usuario=form_usuario.save()
+                chefe=Departamento.objects.get(nome=form_usuario.cleaned_data['lotacao'])
+
+                titulo = "Novo Usuario Solicitando Acesso"
+                informacoes = "Nome do Solicitante:" + usuario.nome + " Email:" + usuario.email
+                Alerta.objects.create(titulo=titulo, identificador=usuario.id, url="listar_usuarios",
+                                      informacoes=informacoes,
+                                      usuario=chefe.chefia, status="1")
+                Alerta.objects.create(titulo=titulo, identificador=usuario.id, url="listar_usuarios",
+                                      informacoes=informacoes,
+                                      usuario=adm1, status="1")
+
+
                 sucesso = "ok"
 
         else:
@@ -62,15 +74,18 @@ def logar_usuario(request):
         username = request.POST["username"]
         password = request.POST["password"]
         usuario = authenticate(request, username=username,password=password)
-        User.objects.get(email=username)
-        if(not User.objects.get(email=username).is_active):
-            messages.error(request, "Usuario não autorizado")
-            return redirect('logar_usuario')
-        elif usuario is not None:
-            login(request,usuario)
-            return redirect('calendario')
-        else:
-            messages.error(request,"Usuario ou senha incoretos")
+        try:
+            if (not User.objects.get(email=username).is_active):
+                messages.error(request, "Usuário não autorizado")
+                return redirect('logar_usuario')
+            elif usuario is not None:
+                login(request,usuario)
+                return redirect('calendario')
+            else:
+                messages.error(request,"Senha incoreta")
+                return redirect('logar_usuario')
+        except:
+            messages.error(request, "Usuário incorreto")
             return redirect('logar_usuario')
     else:
         form_login = AuthenticationForm()

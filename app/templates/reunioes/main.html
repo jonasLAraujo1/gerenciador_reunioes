@@ -91,11 +91,13 @@
 								<input type="hidden" class="form-control" name="id" id="id">
 								<button  class="btn btn-outline-success " type="submit">Cancelar</button>
 							</form>
+							{% if user.servidor%}
 							<form class="form-horizontal" method="POST" action="{%url 'acao_remover' %}">
 								{% csrf_token %}
 								<input type="hidden" class="form-control" name="id" id="id">
 								<button  class="btn btn-outline-success " type="submit">Excluir</button>
 							</form>
+							{%endif%}
 						</nav>
 						<nav class="navbar navbar-light bg-light" >
 							<form class="form-horizontal" method="POST" target="_blank" action="{%url 'acao_ata' %}"> <!-- target=_BLANK -->
