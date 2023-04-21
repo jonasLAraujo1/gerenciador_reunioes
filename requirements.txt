@@ -11,7 +11,7 @@ PyPDF2==1.26.0
 pytz==2019.3
 reportlab==3.5.32
 six==1.13.0
-sqlparse==0.3.0
+sqlparse==0.4.4
 webencodings==0.5.1
 whitenoise==4.1.4
 xhtml2pdf==0.2.3
