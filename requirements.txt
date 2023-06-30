@@ -7,7 +7,7 @@ html5lib==1.0.1
 mysqlclient==1.4.5
 Pillow==6.2.1
 psycopg2==2.8.4
-PyPDF2==1.26.0
+PyPDF2==1.27.9
 pytz==2019.3
 reportlab==3.5.32
 six==1.13.0
